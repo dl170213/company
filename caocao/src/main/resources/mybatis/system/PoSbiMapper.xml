@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.fims.system.dao.PoSbiDao">
+
+	<select id="get" resultType="com.fims.system.domain.PoSbiDO">
+		select `id`,`poid`,`sbiid`,`reseve1` from sys_po_sbi where id = #{value}
+	</select>
+
+	<select id="list" resultType="com.fims.system.domain.PoSbiDO">
+		select `id`,`poid`,`sbiid`,`reseve1` from sys_po_sbi
+        <where>  
+		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+		  		  <if test="poid != null and poid != ''"> and poid = #{poid} </if>
+		  		  <if test="sbiid != null and sbiid != ''"> and sbiid = #{sbiid} </if>
+		  		  <if test="reseve1 != null and reseve1 != ''"> and reseve1 = #{reseve1} </if>
+		  		</where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+			<otherwise>
+                order by id desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="count" resultType="int">
+		select count(*) from sys_po_sbi
+		 <where>  
+		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+		  		  <if test="poid != null and poid != ''"> and poid = #{poid} </if>
+		  		  <if test="sbiid != null and sbiid != ''"> and sbiid = #{sbiid} </if>
+		  		  <if test="reseve1 != null and reseve1 != ''"> and reseve1 = #{reseve1} </if>
+		  		</where>
+	</select>
+	 
+	<insert id="save" parameterType="com.fims.system.domain.PoSbiDO" useGeneratedKeys="true" keyProperty="id">
+		insert into sys_po_sbi
+		(
+			`poid`, 
+			`sbiid`, 
+			`reseve1`
+		)
+		values
+		(
+			#{poid}, 
+			#{sbiid}, 
+			#{reseve1}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.fims.system.domain.PoSbiDO">
+		update sys_po_sbi 
+		<set>
+			<if test="poid != null">`poid` = #{poid}, </if>
+			<if test="sbiid != null">`sbiid` = #{sbiid}, </if>
+			<if test="reseve1 != null">`reseve1` = #{reseve1}</if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<delete id="remove">
+		delete from sys_po_sbi where id = #{value}
+	</delete>
+
+	<delete id="removeByPo" parameterType="String">
+		delete from sys_po_sbi where poid = #{_parameter}
+	</delete>
+
+	<delete id="removeBySbi" parameterType="String">
+		delete from sys_po_sbi where sbiid = #{_parameter}
+	</delete>
+	
+	<delete id="batchRemove">
+		delete from sys_po_sbi where id in 
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+</mapper>

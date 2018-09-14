@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.fims.system.dao.CheckDao">
+
+	<select id="get" resultType="com.fims.system.domain.CheckDO">
+		select f.`id`,f.`invoicenumber`,f.`invoicetime`,f.`number`,f.`tax`,f.`total`,f.`realnumber`,f.`createtime`,f.`user_id_create`,u.name userIdExpense
+		,f.`username`,f.`remark`,f.`status`,f.`repeat` from fmd_check  f LEFT JOIN sys_user u ON (f.username = u.username) where f.id = #{value}
+	</select>
+
+	<select id="getByNumber" resultType="com.fims.system.domain.CheckDO">
+		select f.`id`,f.`invoicenumber`,f.`invoicetime`,f.`number`,f.`tax`,f.`total`,f.`realnumber`,f.`createtime`,f.`user_id_create`,u.name userIdExpense
+		,f.`username`,f.`remark`,f.`status`,f.`repeat` from fmd_check  f LEFT JOIN sys_user u ON (f.username = u.username) where f.invoicenumber = #{value}
+	</select>
+
+	<select id="list" resultType="com.fims.system.domain.CheckDO">
+		select f.`id`,f.`invoicenumber`,f.`invoicetime`,f.`number`,f.`tax`,f.`total`,f.`realnumber`,f.`createtime`,f.`user_id_create`,u.name userIdExpense
+		,f.`username`,f.`remark`,f.`status`,f.`repeat`,su.username userNameCreate from fmd_check f
+		LEFT JOIN sys_user su ON (f.user_id_create = su.user_id) LEFT JOIN sys_user u ON (f.username = u.username)
+        <where>  
+		  		  <if test="id != null and id != ''"> and f.id = #{id} </if>
+		  		  <if test="invoicenumber != null and invoicenumber != ''"> and f.invoicenumber = #{invoicenumber} </if>
+		  		  <if test="invoicetime != null and invoicetime != ''"> and f.invoicetime = #{invoicetime} </if>
+		  		  <if test="number != null and number != ''"> and f.number = #{number} </if>
+		  		  <if test="realnumber != null and realnumber != ''"> and f.realnumber = #{realnumber} </if>
+		  		  <if test="createtime != null and createtime != ''"> and f.createtime = #{createtime} </if>
+		  		  <if test="userIdCreate != null and userIdCreate != ''"> and f.user_id_create = #{userIdCreate} </if>
+		  		  <if test="userIdExpense != null and userIdExpense != ''"> and f.user_id_expense = #{userIdExpense} </if>
+		  		  <if test="remark != null and remark != ''"> and f.remark = #{remark} </if>
+		  		  <if test="status != null and status != ''"> and f.status = #{status} </if>
+		  		  <if test="repeat != null and repeat != ''"> and f.repeat = #{repeat} </if>
+					<if test="starttime != null and starttime != ''">
+						and ((f.createtime &gt;= #{starttime} and f.createtime &lt;= #{endtime}) or
+						(f.invoicetime &gt;= #{starttime} and f.invoicetime &lt;= #{endtime}))
+					</if>
+		</where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+			<otherwise>
+                order by f.id desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="count" resultType="int">
+		select count(*) from fmd_check f
+		LEFT JOIN sys_user su ON (f.user_id_create = su.user_id)
+		<where>
+			<if test="id != null and id != ''"> and f.id = #{id} </if>
+			<if test="invoicenumber != null and invoicenumber != ''"> and f.invoicenumber = #{invoicenumber} </if>
+			<if test="invoicetime != null and invoicetime != ''"> and f.invoicetime = #{invoicetime} </if>
+			<if test="number != null and number != ''"> and f.number = #{number} </if>
+			<if test="realnumber != null and realnumber != ''"> and f.realnumber = #{realnumber} </if>
+			<if test="createtime != null and createtime != ''"> and f.createtime = #{createtime} </if>
+			<if test="userIdCreate != null and userIdCreate != ''"> and f.user_id_create = #{userIdCreate} </if>
+			<if test="userIdExpense != null and userIdExpense != ''"> and f.user_id_expense = #{userIdExpense} </if>
+			<if test="remark != null and remark != ''"> and f.remark = #{remark} </if>
+			<if test="status != null and status != ''"> and f.status = #{status} </if>
+			<if test="repeat != null and repeat != ''"> and f.repeat = #{repeat} </if>
+			<if test="starttime != null and starttime != ''">
+				and ((f.createtime &gt;= #{starttime} and f.createtime &lt;= #{endtime}) or
+				(f.invoicetime &gt;= #{starttime} and f.invoicetime &lt;= #{endtime}))
+			</if>
+		</where>
+	</select>
+
+	<insert id="save" parameterType="com.fims.system.domain.CheckDO" useGeneratedKeys="true" keyProperty="id">
+		insert into fmd_check
+		(
+			`invoicenumber`, 
+			`invoicetime`, 
+			`number`,
+			`tax`,
+			`total`,
+			`realnumber`, 
+			`createtime`, 
+			`user_id_create`, 
+			`user_id_expense`,
+			`username`,
+			`remark`, 
+			`status`, 
+			`repeat`
+		)
+		values
+		(
+			#{invoicenumber}, 
+			#{invoicetime}, 
+			#{number},
+			#{tax},
+			#{total},
+			#{realnumber}, 
+			#{createtime}, 
+			#{userIdCreate}, 
+			#{userIdExpense},
+			#{username},
+			#{remark}, 
+			#{status}, 
+			#{repeat}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.fims.system.domain.CheckDO">
+		update fmd_check 
+		<set>
+			<if test="invoicenumber != null">`invoicenumber` = #{invoicenumber}, </if>
+			<if test="invoicetime != null">`invoicetime` = #{invoicetime}, </if>
+			<if test="number != null">`number` = #{number}, </if>
+			<if test="tax != null">`tax` = #{tax}, </if>
+			<if test="total != null">`total` = #{total}, </if>
+			<if test="realnumber != null">`realnumber` = #{realnumber}, </if>
+			<if test="createtime != null">`createtime` = #{createtime}, </if>
+			<if test="userIdCreate != null">`user_id_create` = #{userIdCreate}, </if>
+			<if test="userIdExpense != null">`user_id_expense` = #{userIdExpense}, </if>
+			<if test="username != null">`username` = #{username}, </if>
+			<if test="remark != null">`remark` = #{remark}, </if>
+			<if test="status != null">`status` = #{status}, </if>
+			<if test="repeat != null">`repeat` = #{repeat}</if>
+		</set>
+		where id = #{id}
+	</update>
+
+	<update id="updateRepeat" parameterType="String">
+		update fmd_check
+		<set>
+			`repeat` = '0'
+		</set>
+		where invoicenumber = #{_parameter}
+	</update>
+
+	<update id="updateRepeat1" parameterType="String">
+		update fmd_check
+		<set>
+			`repeat` = '1'
+		</set>
+		where invoicenumber = #{_parameter}
+	</update>
+
+	<delete id="remove">
+		delete from fmd_check where id = #{value}
+	</delete>
+	
+	<delete id="batchRemove">
+		delete from fmd_check where id in 
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+</mapper>

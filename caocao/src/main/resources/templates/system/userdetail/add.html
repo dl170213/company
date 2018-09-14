@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<head th:include="system/userdetail/include :: header"></head>
+<body class="gray-bg">
+	<div class="wrapper wrapper-content ">
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="ibox float-e-margins">
+					<div class="ibox-content" >
+						<form class="form-horizontal m-t" id="signupForm" >
+							<div class="form-group" >
+								<label class="col-sm-2 control-label col-sm-20"><span style="color: red">*</span>工号：</label>
+								<div class="col-sm-3">
+									<input id="username" name="username" class="form-control input-sm" type="text">
+								</div>
+								<label class="col-sm-2 control-label"><span style="color: red">*</span>状态：</label>
+								<div class="col-sm-3">
+									<select id="status" name="status" class="form-control select-sm">
+										<option value="1">在职</option>
+										<option value="2">离职</option>
+										<option value="3">试用</option>
+									</select>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-2 control-label col-sm-20"><span style="color: red">*</span>姓名：</label>
+								<div class="col-sm-3">
+									<input id="name" name="name" class="form-control input-sm" type="text">
+								</div>
+								<label class="col-sm-2 control-label"><span style="color: red">*</span>机构：</label>
+								<div class="col-sm-3">
+									<input  class="form-control input-sm" type="text" readonly placeholder="请选择机构">
+								</div>
+
+							</div>
+
+							<div class="form-group">
+								<label class="col-sm-2 control-label col-sm-20">手机：</label>
+								<div class="col-sm-3">
+									<input  class="form-control input-sm" type="text">
+								</div>
+								<label class="col-sm-2 control-label">邮箱：</label>
+								<div class="col-sm-3">
+									<div class="input-group">
+										<input type="text" class="form-control input-sm" id="testNoBtn1">
+										<div class="input-group-btn">
+											<button type="button" class="btn btn-white dropdown-toggle" data-toggle="dropdown">
+												<span class="caret"></span>
+											</button>
+											<ul class="dropdown-menu dropdown-menu-right" role="menu">
+											</ul>
+										</div>
+										<!-- /btn-group -->
+									</div>
+								</div>
+
+							</div>
+
+							<!-- 基础信息 -->
+														<div class="form-group">
+								<label class="col-sm-2 control-label col-sm-20">项目：</label>
+								<div class="col-sm-3">
+									<!--<input id="projectId" name="projectId" class="form-control" type="text"
+										   readonly placeholder="请选择项目" onclick="openUser()">-->
+									<div class="input-group">
+										<input type="text" class="form-control input-sm" id="testNoBtn">
+										<div class="input-group-btn">
+											<button type="button" class="btn btn-white dropdown-toggle" data-toggle="dropdown">
+												<span class="caret"></span>
+											</button>
+											<ul class="dropdown-menu dropdown-menu-right" role="menu">
+											</ul>
+										</div>
+										<!-- /btn-group -->
+									</div>
+								</div>
+								<label class="col-sm-2 control-label">入职时间：</label>
+								<div class="col-sm-3">
+									<input id="entryTime" name="entryTime" class="form-control input-sm" type="text"
+										   readonly="readonly" placeholder="请选择入职时间">
+								</div>
+							</div>
+														<div class="form-group">
+								<label class="col-sm-2 control-label col-sm-20">转正时间：</label>
+								<div class="col-sm-3">
+									<input id="positiveTime" name="positiveTime" class="form-control input-sm" type="text"
+										   readonly placeholder="请选择转正时间">
+								</div>
+								<label class="col-sm-2 control-label">离职时间：</label>
+								<div class="col-sm-3">
+									<input id="leaveTime" name="leaveTime" class="form-control input-sm" type="text"
+										   readonly placeholder="请选择离职时间">
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-2 control-label col-sm-20">职务：</label>
+								<div class="col-sm-3">
+									<input id="duty" name="duty" class="form-control input-sm" type="text">
+								</div>
+								<label class="col-sm-2 control-label">岗位级别：</label>
+								<div class="col-sm-3">
+									<input id="joblevel" name="joblevel" class="form-control input-sm" type="text">
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-2 control-label col-sm-20">身份证号：</label>
+								<div class="col-sm-3">
+									<input id="idnumber" name="idnumber" class="form-control input-sm" type="text">
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-2 control-label col-sm-20">身份证地址：</label>
+								<div class="col-sm-8">
+									<input id="idaddress" name="idaddress" class="form-control input-sm" type="text">
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-2 control-label col-sm-20">毕业学校：</label>
+								<div class="col-sm-3">
+									<input id="graduateschool" name="graduateschool" class="form-control input-sm" type="text">
+								</div>
+								<label class="col-sm-2 control-label">专业：</label>
+								<div class="col-sm-3">
+									<input id="major" name="major" class="form-control input-sm" type="text">
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-2 control-label col-sm-20">学历：</label>
+								<div class="col-sm-3">
+									<input id="education" name="education" class="form-control input-sm" type="text">
+								</div>
+								<label class="col-sm-2 control-label">证书编号：</label>
+								<div class="col-sm-3">
+									<input id="diploma" name="diploma" class="form-control input-sm" type="text">
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-2 control-label col-sm-20">合同签订日期：</label>
+								<div class="col-sm-3">
+									<input id="contracttime" name="contracttime" class="form-control input-sm" type="text"
+										   readonly placeholder="请选择合同签订日期">
+								</div>
+								<label class="col-sm-2 control-label ">毕业年份：</label>
+								<div class="col-sm-3">
+									<input id="graduateyear" name="graduateyear" class="form-control input-sm" type="text"
+										   readonly placeholder="请选择毕业年份">
+								</div>
+							</div>
+
+							<!-- 工资信息 -->
+							<div class="form-group">
+								<label class="col-sm-2 control-label col-sm-20">基本工资：</label>
+								<div class="col-sm-3">
+									<input class="form-control input-sm" type="text">
+								</div>
+								<label class="col-sm-2 control-label ">试用期工资：</label>
+								<div class="col-sm-3">
+									<input class="form-control input-sm" type="text">
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-2 control-label col-sm-20">工资卡号：</label>
+								<div class="col-sm-3">
+									<input class="form-control input-sm" type="text">
+								</div>
+								<label class="col-sm-2 control-label">联行号：</label>
+								<div class="col-sm-3">
+									<input class="form-control input-sm" type="text">
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-2 control-label col-sm-20">开户行名称：</label>
+								<div class="col-sm-8">
+									<input class="form-control input-sm" type="text">
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-2 control-label col-sm-20">第二银行卡号：</label>
+								<div class="col-sm-3">
+									<input class="form-control input-sm" type="text">
+								</div>
+								<label class="col-sm-2 control-label">第二联行号：</label>
+								<div class="col-sm-3">
+									<input class="form-control input-sm" type="text">
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-2 control-label col-sm-20">第二开户行名称：</label>
+								<div class="col-sm-8">
+									<input class="form-control input-sm" type="text">
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-2 control-label col-sm-20">居住地：</label>
+								<div class="col-sm-8">
+									<input  class="form-control input-sm" type="text">
+								</div>
+							</div>
+
+							<!--<div class="form-group">
+								<label class="col-sm-2 control-label col-sm-20"><span style="color: red">*</span>状态：</label>
+								<div class="col-sm-8">
+									<label class="radio-inline">
+										<input type="radio" name="status" value="1" /> 在职</label>
+									<label class="radio-inline">
+										<input type="radio" name="status" value="0" /> 离职</label>
+									<label class="radio-inline">
+										<input type="radio" name="status" value="2" /> 试用</label>
+								</div>
+							</div>-->
+							<div class="form-group">
+								<label class="col-sm-2 control-label col-sm-20"><span style="color: red">*</span>角色：</label>
+								<div class="col-sm-8">
+									<div class="">
+										<label  class="checkbox-inline">
+											<input name="role" type="checkbox" value="1">超级管理员</label>
+										<label  class="checkbox-inline">
+											<input name="role" type="checkbox" value="1">人事管理员</label>
+										<label  class="checkbox-inline">
+											<input name="role" type="checkbox" value="1">财务管理员</label>
+										<label  class="checkbox-inline">
+											<input name="role" type="checkbox" value="1">项目经理</label>
+									</div>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label class="col-sm-2 control-label col-sm-20">备注：</label>
+								<div class="col-sm-8">
+									<textarea id="remark" name="remark" class="form-control input-sm" type="text"></textarea>
+								</div>
+							</div><!--
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">预留1：</label>
+								<div class="col-sm-8">
+									<input id="reseve1" name="reseve1" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">预留2：</label>
+								<div class="col-sm-8">
+									<input id="reseve2" name="reseve2" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">预留3：</label>
+								<div class="col-sm-8">
+									<input id="reseve3" name="reseve3" class="form-control" type="text">
+								</div>
+							</div>-->
+							<div class="form-group">
+								<label class="col-sm-2 control-label col-sm-20"></label>
+								<div class="col-sm-8 ">
+									<button type="submit" class="btn btn-primary">提交</button>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+	</div>
+	</div>
+	<div th:include="system/userdetail/include::footer"></div>
+	<script type="text/javascript" src="/js/appjs/system/userdetail/add.js">
+	</script>
+</body>
+</html>

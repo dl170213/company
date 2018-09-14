@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.fims.system.dao.SbiDao">
+
+	<select id="get" resultType="com.fims.system.domain.SbiDO">
+		select `id`,`pmid`,`pm`,`worktype`,`pretax`,`posttax`,`tax`,`customer`,`ticketdate`,`invoicenumber`,`sbi`,`createtime`,`reseve1`,`reseve2`,`reseve3` from sbi where id = #{value}
+	</select>
+
+	<select id="getBySbi" resultType="com.fims.system.domain.SbiDO">
+		select `id`,`pmid`,`pm`,`worktype`,`pretax`,`posttax`,`tax`,`customer`,`ticketdate`,`invoicenumber`,`sbi`,`createtime`,`reseve1`,`reseve2`,`reseve3` from sbi where sbi = #{value}
+	</select>
+
+	<select id="list" resultType="com.fims.system.domain.SbiDO">
+		select `id`,`pmid`,`pm`,`worktype`,`pretax`,`posttax`,`tax`,`customer`,`ticketdate`,`invoicenumber`,`sbi`,`createtime`,`reseve1`,`reseve2`,`reseve3` from sbi
+        <where>  
+		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+		  		  <if test="pmid != null and pmid != ''"> and pmid = #{pmid} </if>
+		  		  <if test="pm != null and pm != ''"> and pm = #{pm} </if>
+		  		  <if test="worktype != null and worktype != ''"> and worktype = #{worktype} </if>
+		  		  <if test="pretax != null and pretax != ''"> and pretax = #{pretax} </if>
+		  		  <if test="posttax != null and posttax != ''"> and posttax = #{posttax} </if>
+		  		  <if test="tax != null and tax != ''"> and tax = #{tax} </if>
+		  		  <if test="customer != null and customer != ''"> and customer = #{customer} </if>
+		  		  <if test="ticketdate != null and ticketdate != ''"> and ticketdate = #{ticketdate} </if>
+		  		  <if test="invoicenumber != null and invoicenumber != ''"> and invoicenumber = #{invoicenumber} </if>
+		  		  <if test="sbi != null and sbi != ''"> and sbi = #{sbi} </if>
+		  		  <if test="createtime != null and createtime != ''"> and createtime = #{createtime} </if>
+		  		  <if test="reseve1 != null and reseve1 != ''"> and reseve1 = #{reseve1} </if>
+		  		  <if test="reseve2 != null and reseve2 != ''"> and reseve2 = #{reseve2} </if>
+		  		  <if test="reseve3 != null and reseve3 != ''"> and reseve3 = #{reseve3} </if>
+					<if test="searchName != null and searchName != ''"> and
+						((pm LIKE concat('%',#{searchName},'%')) or (worktype LIKE concat('%',#{searchName},'%'))
+						or (customer LIKE concat('%',#{searchName},'%')) or (sbi LIKE concat('%',#{searchName},'%')))
+					</if>
+					<if test="starttime != null and starttime != ''">
+						and (createtime &gt;= #{starttime} and createtime &lt;= #{endtime})
+					</if>
+		  		</where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+			<otherwise>
+                order by id desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="count" resultType="int">
+		select count(*) from sbi
+		 <where>  
+		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+		  		  <if test="pmid != null and pmid != ''"> and pmid = #{pmid} </if>
+		  		  <if test="pm != null and pm != ''"> and pm = #{pm} </if>
+		  		  <if test="worktype != null and worktype != ''"> and worktype = #{worktype} </if>
+		  		  <if test="pretax != null and pretax != ''"> and pretax = #{pretax} </if>
+		  		  <if test="posttax != null and posttax != ''"> and posttax = #{posttax} </if>
+		  		  <if test="tax != null and tax != ''"> and tax = #{tax} </if>
+		  		  <if test="customer != null and customer != ''"> and customer = #{customer} </if>
+		  		  <if test="ticketdate != null and ticketdate != ''"> and ticketdate = #{ticketdate} </if>
+		  		  <if test="invoicenumber != null and invoicenumber != ''"> and invoicenumber = #{invoicenumber} </if>
+		  		  <if test="sbi != null and sbi != ''"> and sbi = #{sbi} </if>
+		  		  <if test="createtime != null and createtime != ''"> and createtime = #{createtime} </if>
+		  		  <if test="reseve1 != null and reseve1 != ''"> and reseve1 = #{reseve1} </if>
+		  		  <if test="reseve2 != null and reseve2 != ''"> and reseve2 = #{reseve2} </if>
+		  		  <if test="reseve3 != null and reseve3 != ''"> and reseve3 = #{reseve3} </if>
+			 <if test="searchName != null and searchName != ''"> and
+				 ((pm LIKE concat('%',#{searchName},'%')) or (worktype LIKE concat('%',#{searchName},'%'))
+				 or (customer LIKE concat('%',#{searchName},'%')) or (sbi LIKE concat('%',#{searchName},'%')))
+			 </if>
+			 <if test="starttime != null and starttime != ''">
+				 and (createtime &gt;= #{starttime} and createtime &lt;= #{endtime})
+			 </if>
+		  		</where>
+	</select>
+	 
+	<insert id="save" parameterType="com.fims.system.domain.SbiDO" useGeneratedKeys="true" keyProperty="id">
+		insert into sbi
+		(
+			`pmid`, 
+			`pm`, 
+			`worktype`, 
+			`pretax`, 
+			`posttax`, 
+			`tax`, 
+			`customer`, 
+			`ticketdate`, 
+			`invoicenumber`, 
+			`sbi`, 
+			`createtime`, 
+			`reseve1`, 
+			`reseve2`, 
+			`reseve3`
+		)
+		values
+		(
+			#{pmid}, 
+			#{pm}, 
+			#{worktype}, 
+			#{pretax}, 
+			#{posttax}, 
+			#{tax}, 
+			#{customer}, 
+			#{ticketdate}, 
+			#{invoicenumber}, 
+			#{sbi}, 
+			#{createtime}, 
+			#{reseve1}, 
+			#{reseve2}, 
+			#{reseve3}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.fims.system.domain.SbiDO">
+		update sbi 
+		<set>
+			<if test="pmid != null">`pmid` = #{pmid}, </if>
+			<if test="pm != null">`pm` = #{pm}, </if>
+			<if test="worktype != null">`worktype` = #{worktype}, </if>
+			<if test="pretax != null">`pretax` = #{pretax}, </if>
+			<if test="posttax != null">`posttax` = #{posttax}, </if>
+			<if test="tax != null">`tax` = #{tax}, </if>
+			<if test="customer != null">`customer` = #{customer}, </if>
+			<if test="ticketdate != null">`ticketdate` = #{ticketdate}, </if>
+			<if test="invoicenumber != null">`invoicenumber` = #{invoicenumber}, </if>
+			<if test="sbi != null">`sbi` = #{sbi}, </if>
+			<if test="createtime != null">`createtime` = #{createtime}, </if>
+			<if test="reseve1 != null">`reseve1` = #{reseve1}, </if>
+			<if test="reseve2 != null">`reseve2` = #{reseve2}, </if>
+			<if test="reseve3 != null">`reseve3` = #{reseve3}</if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<delete id="remove">
+		delete from sbi where id = #{value}
+	</delete>
+	
+	<delete id="batchRemove">
+		delete from sbi where id in 
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+</mapper>

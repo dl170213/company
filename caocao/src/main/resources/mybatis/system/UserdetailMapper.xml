@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.fims.system.dao.UserdetailDao">
+
+	<select id="get" resultType="com.fims.system.domain.UserdetailDO">
+		select `id`,`user_id`,`project_id`,`entry_time`,`positive_time`,`leave_time`,`duty`,`joblevel`,`idnumber`,`idaddress`,`graduateschool`,`major`,`education`,`diploma`,`graduateyear`,`contracttime`,`remark`,`reseve1`,`reseve2`,`reseve3` from pm_userdetail where id = #{value}
+	</select>
+
+	<select id="list" resultType="com.fims.system.domain.UserdetailDO">
+		select `id`,`user_id`,`project_id`,`entry_time`,`positive_time`,`leave_time`,`duty`,`joblevel`,`idnumber`,`idaddress`,`graduateschool`,`major`,`education`,`diploma`,`graduateyear`,`contracttime`,`remark`,`reseve1`,`reseve2`,`reseve3` from pm_userdetail
+        <where>  
+		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+		  		  <if test="userId != null and userId != ''"> and user_id = #{userId} </if>
+		  		  <if test="projectId != null and projectId != ''"> and project_id = #{projectId} </if>
+		  		  <if test="entryTime != null and entryTime != ''"> and entry_time = #{entryTime} </if>
+		  		  <if test="positiveTime != null and positiveTime != ''"> and positive_time = #{positiveTime} </if>
+		  		  <if test="leaveTime != null and leaveTime != ''"> and leave_time = #{leaveTime} </if>
+		  		  <if test="duty != null and duty != ''"> and duty = #{duty} </if>
+		  		  <if test="joblevel != null and joblevel != ''"> and joblevel = #{joblevel} </if>
+		  		  <if test="idnumber != null and idnumber != ''"> and idnumber = #{idnumber} </if>
+		  		  <if test="idaddress != null and idaddress != ''"> and idaddress = #{idaddress} </if>
+		  		  <if test="graduateschool != null and graduateschool != ''"> and graduateschool = #{graduateschool} </if>
+		  		  <if test="major != null and major != ''"> and major = #{major} </if>
+		  		  <if test="education != null and education != ''"> and education = #{education} </if>
+		  		  <if test="diploma != null and diploma != ''"> and diploma = #{diploma} </if>
+		  		  <if test="graduateyear != null and graduateyear != ''"> and graduateyear = #{graduateyear} </if>
+		  		  <if test="contracttime != null and contracttime != ''"> and contracttime = #{contracttime} </if>
+		  		  <if test="remark != null and remark != ''"> and remark = #{remark} </if>
+		  		  <if test="reseve1 != null and reseve1 != ''"> and reseve1 = #{reseve1} </if>
+		  		  <if test="reseve2 != null and reseve2 != ''"> and reseve2 = #{reseve2} </if>
+		  		  <if test="reseve3 != null and reseve3 != ''"> and reseve3 = #{reseve3} </if>
+		  		</where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+			<otherwise>
+                order by id desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="count" resultType="int">
+		select count(*) from pm_userdetail
+		 <where>  
+		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+		  		  <if test="userId != null and userId != ''"> and user_id = #{userId} </if>
+		  		  <if test="projectId != null and projectId != ''"> and project_id = #{projectId} </if>
+		  		  <if test="entryTime != null and entryTime != ''"> and entry_time = #{entryTime} </if>
+		  		  <if test="positiveTime != null and positiveTime != ''"> and positive_time = #{positiveTime} </if>
+		  		  <if test="leaveTime != null and leaveTime != ''"> and leave_time = #{leaveTime} </if>
+		  		  <if test="duty != null and duty != ''"> and duty = #{duty} </if>
+		  		  <if test="joblevel != null and joblevel != ''"> and joblevel = #{joblevel} </if>
+		  		  <if test="idnumber != null and idnumber != ''"> and idnumber = #{idnumber} </if>
+		  		  <if test="idaddress != null and idaddress != ''"> and idaddress = #{idaddress} </if>
+		  		  <if test="graduateschool != null and graduateschool != ''"> and graduateschool = #{graduateschool} </if>
+		  		  <if test="major != null and major != ''"> and major = #{major} </if>
+		  		  <if test="education != null and education != ''"> and education = #{education} </if>
+		  		  <if test="diploma != null and diploma != ''"> and diploma = #{diploma} </if>
+		  		  <if test="graduateyear != null and graduateyear != ''"> and graduateyear = #{graduateyear} </if>
+		  		  <if test="contracttime != null and contracttime != ''"> and contracttime = #{contracttime} </if>
+		  		  <if test="remark != null and remark != ''"> and remark = #{remark} </if>
+		  		  <if test="reseve1 != null and reseve1 != ''"> and reseve1 = #{reseve1} </if>
+		  		  <if test="reseve2 != null and reseve2 != ''"> and reseve2 = #{reseve2} </if>
+		  		  <if test="reseve3 != null and reseve3 != ''"> and reseve3 = #{reseve3} </if>
+		  		</where>
+	</select>
+	 
+	<insert id="save" parameterType="com.fims.system.domain.UserdetailDO" useGeneratedKeys="true" keyProperty="id">
+		insert into pm_userdetail
+		(
+			`user_id`, 
+			`project_id`, 
+			`entry_time`, 
+			`positive_time`, 
+			`leave_time`, 
+			`duty`, 
+			`joblevel`, 
+			`idnumber`, 
+			`idaddress`, 
+			`graduateschool`, 
+			`major`, 
+			`education`, 
+			`diploma`, 
+			`graduateyear`, 
+			`contracttime`, 
+			`remark`, 
+			`reseve1`, 
+			`reseve2`, 
+			`reseve3`
+		)
+		values
+		(
+			#{userId}, 
+			#{projectId}, 
+			#{entryTime}, 
+			#{positiveTime}, 
+			#{leaveTime}, 
+			#{duty}, 
+			#{joblevel}, 
+			#{idnumber}, 
+			#{idaddress}, 
+			#{graduateschool}, 
+			#{major}, 
+			#{education}, 
+			#{diploma}, 
+			#{graduateyear}, 
+			#{contracttime}, 
+			#{remark}, 
+			#{reseve1}, 
+			#{reseve2}, 
+			#{reseve3}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.fims.system.domain.UserdetailDO">
+		update pm_userdetail 
+		<set>
+			<if test="userId != null">`user_id` = #{userId}, </if>
+			<if test="projectId != null">`project_id` = #{projectId}, </if>
+			<if test="entryTime != null">`entry_time` = #{entryTime}, </if>
+			<if test="positiveTime != null">`positive_time` = #{positiveTime}, </if>
+			<if test="leaveTime != null">`leave_time` = #{leaveTime}, </if>
+			<if test="duty != null">`duty` = #{duty}, </if>
+			<if test="joblevel != null">`joblevel` = #{joblevel}, </if>
+			<if test="idnumber != null">`idnumber` = #{idnumber}, </if>
+			<if test="idaddress != null">`idaddress` = #{idaddress}, </if>
+			<if test="graduateschool != null">`graduateschool` = #{graduateschool}, </if>
+			<if test="major != null">`major` = #{major}, </if>
+			<if test="education != null">`education` = #{education}, </if>
+			<if test="diploma != null">`diploma` = #{diploma}, </if>
+			<if test="graduateyear != null">`graduateyear` = #{graduateyear}, </if>
+			<if test="contracttime != null">`contracttime` = #{contracttime}, </if>
+			<if test="remark != null">`remark` = #{remark}, </if>
+			<if test="reseve1 != null">`reseve1` = #{reseve1}, </if>
+			<if test="reseve2 != null">`reseve2` = #{reseve2}, </if>
+			<if test="reseve3 != null">`reseve3` = #{reseve3}</if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<delete id="remove">
+		delete from pm_userdetail where id = #{value}
+	</delete>
+	
+	<delete id="batchRemove">
+		delete from pm_userdetail where id in 
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+</mapper>

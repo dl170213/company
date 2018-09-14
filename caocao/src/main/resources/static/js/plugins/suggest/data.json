@@ -1,0 +1,41 @@
+{
+	"message": "",
+	"value": [
+		{
+			"userName": "上海联通",
+			"userId":"1001"
+		}, {
+			"userName": "上海移动",
+			"userId":"1002"
+		}, {
+			"userName": "江苏电信-南通",
+			"userId":"1003"
+		}, {
+			"userName": "江苏移动-无锡",
+			"userId":"1004"
+		}, {
+			"userName": "江苏联通-南京",
+			"userId":"1005"
+		}, {
+			"userName": "浙江电信-杭州",
+			"userId":"1006"
+		}, {
+			"userName": "浙江移动-宁波",
+			"userId":"1007"
+		}, {
+			"userName": "浙江联通-温州",
+			"userId":"1008"
+		}, {
+			"userName": "北京电信",
+			"userId":"1009"
+		}, {
+			"userName": "北京移动",
+			"userId":"1010"
+		}, {
+			"userName": "北京联通",
+			"userId":"1011"
+		}
+	],
+	"code": 200,
+	"redirect": ""
+}

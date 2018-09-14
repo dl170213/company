@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<head th:include="system/userdetail/include :: header"></head>
+<body class="gray-bg">
+<div class="wrapper wrapper-content ">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins" style="padding-top: 10%;padding-bottom: 10%">
+                <div class="ibox-content" >
+                    <form class="form-horizontal m-t" id="signupForm" >
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label col-sm-20"><span style="color: red">*</span>试用到期（天）：</label>
+                            <div class="col-sm-3">
+                                <input id="username" name="username" class="form-control" type="text" value="10">
+                            </div>
+                            <div class="col-sm-5">
+                                <div class="checkbox i-checks">
+                                    <label class="checkbox-inline" style="float: left">
+                                        <input name="remind" type="checkbox" value="1"><i></i> 系统通知</label>
+                                    <label class="checkbox-inline" style="float: left">
+                                        <input name="remind" type="checkbox" value="2"><i></i> 邮件通知</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label col-sm-20"><span style="color: red">*</span>合同到期（天）：</label>
+                            <div class="col-sm-3">
+                                <input id="name" name="name" class="form-control" type="text" value="30">
+                            </div>
+                            <div class="col-sm-5">
+                                <div class="checkbox i-checks">
+                                    <label class="checkbox-inline" style="float: left">
+                                        <input name="remind" type="checkbox" value="1"><i></i> 系统通知</label>
+                                    <label class="checkbox-inline" style="float: left">
+                                        <input name="remind" type="checkbox" value="2"><i></i> 邮件通知</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label col-sm-20"></label>
+                            <div class="col-sm-8 ">
+                                <button type="submit" class="btn btn-primary">提交</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div th:include="system/userdetail/include::footer"></div>
+<script type="text/javascript" src="/js/appjs/system/userdetail/add.js">
+</script>
+</body>
+</html>

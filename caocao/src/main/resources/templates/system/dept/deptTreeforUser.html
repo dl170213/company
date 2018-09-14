@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+
+<body class="gray-bg">
+<div class="wrapper wrapper-content animated fadeInRight">
+
+    <div class="row">
+        <div class="col-sm-12">
+
+            <div class="ibox-content" style="width: 100%; overflow:auto">
+                <div id="deptTree"></div>
+            </div>
+            <div class="form-group " style="margin-top: 5px;">
+                <div class="col-sm-12">
+                    <button type="button" onclick="noselect()" class="btn btn-default">清空选择</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div th:include="include :: footer"></div>
+
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        getTreeData()
+    });
+    function getTreeData() {
+        $.ajax({
+            type : "GET",
+            url : "/system/sysDept/tree",
+            success : function(tree) {
+                loadTree(tree);
+            }
+        });
+    }
+    function loadTree(tree) {
+        $('#deptTree').jstree({
+            'core' : {
+                'data' : tree
+            },
+            "plugins" : [ "search" ]
+        });
+        $('#deptTree').jstree().open_all();
+    }
+    $('#deptTree').on("changed.jstree", function(e, data) {
+        if(data.node.id!=-1){
+            parent.loadDept(data.node.id,data.node.text);
+
+        }else{
+            parent.loadDept(0,"总机构");
+        }
+        var index = parent.layer.getFrameIndex(window.name); // 获取窗口索引
+        parent.layer.close(index);
+    });
+    
+    function noselect() {
+        parent.loadDept("","请选择机构");
+        var index = parent.layer.getFrameIndex(window.name); // 获取窗口索引
+        parent.layer.close(index);
+    }
+
+</script>
+</body>
+
+</html>

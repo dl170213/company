@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+	<title>支付订单</title>
+	<link href="css/bootstrap.min.css?v=3.3.6"
+		  th:href="@{/css/bootstrap.min.css?v=3.3.6}" rel="stylesheet">
+	<link rel="stylesheet" href="css/mobile/style.css" type="text/css"/>
+
+	<script src="/js/jquery.min.js?v=2.1.4"></script>
+	
+</head>
+	
+<body>
+<!--头部  star-->
+<!--<header style="color:#fff">
+	<a href="javascript:history.go(-1);">
+		<span>支付订单</span></a>
+</header>-->
+<!--头部 end-->
+<!--内容 star-->
+<div class="contaniner fixed-cont">
+	<div class="pay_img"><img src="img/images/logo-back.png"></div>
+	<form  id="signupForm">
+		<div class="payTime">
+
+			<input id="sn" name="sn" th:value="${sn}" hidden>
+			<input id="code" name="code" th:value="${code}" hidden>
+			<li>终端编号:<span th:text="${sn}"></span></li>
+			<li style="padding-left: 30%;padding-right: 30%;color: black;">
+
+					<div style="text-align: center; border: 0;border-bottom: 1px solid;width: 100%;font-size: 18px;">
+						￥<input type="number" name="number" id="number" style="border: 0;height: 30px;width: 85%;
+						font-weight:bold;" placeholder="请输入金额" onKeyUp="amount(this)" onBlur="overFormat(this)"/>
+					</div>
+
+			</li>
+			<li></li>
+		</div>
+
+		<!--支付 star-->
+		<div class="pay">
+			<div class="show">
+				<li><label><img src="img/images/weixin.png" >微信支付<input name="Fruit" type="radio" value="" checked/><span></span></label> </li>
+				<li><label><img src="img/images/zhifubao.png" >支付宝支付<input name="Fruit" type="radio" value="" /><span></span></label> </li>
+				<li><label><img src="img/images/qmf.png" >全民付<input name="Fruit" type="radio" value="" /><span></span></label> </li>
+				<li class="center"><a href="#" onClick="showHideCode()">查看更多支付方式↓</a></li>
+			</div>
+			<div class="showList" id = "showdiv" style="display:none;">
+				<li><label><img src="img/images/yinhang.png" >银行卡<input name="Fruit" type="radio" value="" /><span></span></label> </li>
+				<li><label><img src="img/images/weixin.png" >添加更多<input name="Fruit" type="radio" value=""/><span></span></label> </li>
+
+				<li style="background:none" ></li>
+			</div>
+		</div>
+    <!--支付 end-->
+    </form>
+</div>
+<div class="book-recovery-bot2" id="footer">
+	<a onclick="aa()"><div class="payBottom">
+    	<li class="textfr">确认支付:</li>
+        <li class="textfl"><span id="paybtn">¥0.00</span></li>
+    </div>
+	</a>
+</div>
+<!--内容 end-->
+<!-- 全局js -->
+<script src="/js/jquery.min.js?v=2.1.4"></script>
+<script src="/js/bootstrap.min.js?v=3.3.6"></script>
+<script type="text/javascript">
+
+	function aa() {
+	//	alert($("#sn").val());
+		if($("#number").val()==""){
+			alert("请输入金额!");
+			return;
+		}
+        $.ajax({
+            type: "GET",
+            url: "mobile/pay",
+            data: $('#signupForm').serialize(),
+            success: function (r) {
+                if (r.code == 0) {
+                    parent.location.href="mobile/getPassword?sn="+$("#sn").val()+"&code="+$("#code").val()+"&number="+$("#number").val();
+                } else {
+
+                }
+            }
+        });
+    }
+    /**
+     * 实时动态强制更改账号录入
+     * arg1 inputObject
+     **/
+    function amount(th){
+        var regStrs = [
+            ['^0(\\d+)$', '$1'], //禁止录入整数部分两位以上，但首位为0
+            ['[^\\d\\.]+$', ''], //禁止录入任何非数字和点
+            ['\\.(\\d?)\\.+', '.$1'], //禁止录入两个以上的点
+            ['^(\\d+\\.\\d{2}).+', '$1'] //禁止录入小数点后两位以上
+        ];
+        for(i=0; i<regStrs.length; i++){
+            var reg = new RegExp(regStrs[i][0]);
+            th.value = th.value.replace(reg, regStrs[i][1]);
+        }
+    }
+
+    /**
+     * 录入完成后，输入模式失去焦点后对录入进行判断并强制更改，并对小数点进行0补全
+     * arg1 inputObject
+     * 这个函数写得很傻，是我很早以前写的了，没有进行优化，但功能十分齐全，你尝试着使用
+     * 其实有一种可以更快速的JavaScript内置函数可以提取杂乱数据中的数字：
+     * parseFloat('10');
+     **/
+    function overFormat(th){
+        var v = th.value;
+        if(v === ''){
+            v = '0.00';
+        }else if(v === '0'){
+            v = '0.00';
+        }else if(v === '0.'){
+            v = '0.00';
+        }else if(/^0+\d+\.?\d*.*$/.test(v)){
+            v = v.replace(/^0+(\d+\.?\d*).*$/, '$1');
+            v = inp.getRightPriceFormat(v).val;
+        }else if(/^0\.\d$/.test(v)){
+            v = v + '0';
+        }else if(!/^\d+\.\d{2}$/.test(v)){
+            if(/^\d+\.\d{2}.+/.test(v)){
+                v = v.replace(/^(\d+\.\d{2}).*$/, '$1');
+            }else if(/^\d+$/.test(v)){
+                v = v + '.00';
+            }else if(/^\d+\.$/.test(v)){
+                v = v + '00';
+            }else if(/^\d+\.\d$/.test(v)){
+                v = v + '0';
+            }else if(/^[^\d]+\d+\.?\d*$/.test(v)){
+                v = v.replace(/^[^\d]+(\d+\.?\d*)$/, '$1');
+            }else if(/\d+/.test(v)){
+                v = v.replace(/^[^\d]*(\d+\.?\d*).*$/, '$1');
+                ty = false;
+            }else if(/^0+\d+\.?\d*$/.test(v)){
+                v = v.replace(/^0+(\d+\.?\d*)$/, '$1');
+                ty = false;
+            }else{
+                v = '';
+            }
+        }
+        th.value = v;
+        $("#paybtn").text(v);
+    }
+
+function showHideCode(){
+ 	$("#showdiv").toggle();
+}
+
+</script>
+
+</body>
+</html>

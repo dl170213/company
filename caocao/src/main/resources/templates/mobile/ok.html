@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:include="mobile/include :: header"></head>
+<body ontouchstart>
+<div class="weui-msg">
+    <div class="weui-msg__icon-area"><i class="weui-icon-success weui-icon_msg"></i></div>
+    <div class="weui-msg__text-area">
+        <h2 class="weui-msg__title">支付成功</h2>
+        <!--支付金额：<span th:text="${number}"></span><br>-->
+        开柜密码：<span th:text="${password}"></span>
+        <p class="weui-msg__desc">请输入密码开柜取物，完毕后请记得关闭柜门！</p>
+    </div>
+    <div class="weui-msg__opr-area">
+        <p class="weui-btn-area">
+            <!--<a href="javascript:;" class="weui-btn weui-btn_primary">完成</a>-->
+            <!--<a href="javascript:;" class="weui-btn weui-btn_default">辅助操作</a>-->
+        </p>
+    </div>
+    <div class="weui-msg__extra-area">
+        <div class="weui-footer">
+            <p class="weui-footer__text">Copyright © 2018 ChinaUMS</p>
+        </div>
+    </div>
+</div>
+<div th:include="mobile/include::footer"></div>
+
+</body>
+</html>

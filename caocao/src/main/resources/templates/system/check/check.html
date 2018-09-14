@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<head th:include="system/check/include :: header"></head>
+<body class="gray-bg">
+	<div class="wrapper wrapper-content ">
+		<div class="col-sm-12"  style="margin-top: -15px;">
+			<div class="ibox">
+				<div class="ibox-body">
+					<div class="fixed-table-toolbar">
+						<div class="columns pull-left">
+							<button shiro:hasPermission="system:check:add" type="button" class="btn  btn-primary input-sm fims-padding-sm-14" onclick="add('-1','0')">
+								<i class="fa fa-plus" aria-hidden="true"></i>添加
+							</button>
+							<button shiro:hasPermission="system:check:batchRemove" type="button" class="btn  btn-danger input-sm fims-padding-sm-14"
+								onclick="batchRemove()">
+								<i class="fa fa-trash" aria-hidden="true"></i>删除
+							</button>
+							<button shiro:hasPermission="system:check:import" type="button" class="btn  btn-success input-sm fims-padding-sm-14"
+									onclick="openExcelupload()">
+								<i class="fa fa-download" aria-hidden="true"></i>导入基础发票
+							</button>
+						</div>
+						<div class="columns pull-right searchmaTop searchmaLeft">
+							<button class="btn btn-success input-sm fims-padding-sm-14" onclick="reLoad(0)">查询</button>
+						</div>
+						<div class="columns pull-right col-md-2 nopadding searchmaLeft">
+							<input id="searchName" type="text" class="form-control input-sm fims-padding-sm-14" style="margin-top: 4px;font-size: 14px;"
+							 autofocus="autofocus" onkeydown="onKeyDown(event)"  placeholder="请输入发票编号"
+							maxlength="100">
+						</div>
+						<div class="columns pull-right col-md-2 nopadding searchmaLeft">
+							<input id="searchtime" name="searchtime" class="form-control input-sm fims-padding-sm-14" type="text"
+								   placeholder="请选择时间段" style="margin-top: 4px;font-size: 14px;" >
+						</div>
+						<div shiro:hasPermission="system:check:repeatAndDelete" class="columns pull-right nopadding searchmaLeft">
+							<div class="switch pull-right" id="reSwitch" >
+								<input id="reRepeat" type="checkbox" data-label-width="60" data-on-text="YES" data-off-text="NO" data-label-text="重复发票"/>
+							</div>
+						</div>
+						<div shiro:hasPermission="system:check:repeatAndDelete" class="columns pull-right col-md-2 nopadding searchmaLeft">
+							<div class="switch pull-right" id="deSwitch">
+								<input id="deStatus" type="checkbox" data-label-width="60" data-on-text="YES" data-off-text="NO" data-label-text="已删发票"/>
+							</div>
+						</div>
+					</div>
+					<table id="exampleTable" data-mobile-responsive="true" data-row-style="rowStyle" >
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--shiro控制bootstraptable行内按钮看见性 来自caocao的创新方案 -->
+		<div>
+			<script type="text/javascript">
+				var s_edit_h = 'hidden';
+				var s_remove_h = 'hidden';
+				var s_resetPwd_h = 'hidden';
+			</script>
+		</div>
+		<div shiro:hasPermission="system:check:edit">
+			<script type="text/javascript">
+				s_edit_h = '';
+			</script>
+		</div>
+		<div shiro:hasPermission="system:check:remove">
+			<script type="text/javascript">
+				s_remove_h = '';
+			</script>
+		</div>
+		<div shiro:hasPermission="system:check:resetPwd">
+			<script type="text/javascript">
+				var s_resetPwd_h = '';
+			</script>
+		</div>
+	</div>
+	<div th:include="system/check/include :: footer"></div>
+	<script type="text/javascript" src="/js/appjs/system/check/check.js"></script>
+</body>
+</html>

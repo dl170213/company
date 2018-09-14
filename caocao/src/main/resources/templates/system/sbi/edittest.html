@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<head th:include="system/sbi/include :: header"></head>
+<body class="gray-bg">
+	<div class="wrapper wrapper-content ">
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="ibox float-e-margins">
+					<div class="ibox-content">
+						<form class="form-horizontal m-t" id="signupForm">
+						<!--<input id="id" name="id" th:value="${sbi.id}"  type="hidden">-->
+							<!--<div class="form-group">
+								<label class="col-sm-3 control-label">项目编号：</label>
+								<div class="col-sm-8">
+									<input id="pmid" name="pmid" th:value="${sbi.pmid}" class="form-control" type="text">
+								</div>
+							</div>-->
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">项目：</label>
+								<div class="col-sm-8">
+									<input id="pm" name="pm" value="上海联通" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">工作类型：</label>
+								<div class="col-sm-8">
+									<input id="worktype" name="worktype" value="NI" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">税前金额：</label>
+								<div class="col-sm-8">
+									<input id="pretax" name="pretax" value="119440" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">税后金额：</label>
+								<div class="col-sm-8">
+									<input id="posttax" name="posttax" value="126606.4" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">税收金额：</label>
+								<div class="col-sm-8">
+									<input id="tax" name="tax" value="7166.4" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">客户名称：</label>
+								<div class="col-sm-8">
+									<input id="customer" name="customer" value="诺基亚通信系统技术（北京）有限公司" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">开票时间：</label>
+								<div class="col-sm-8">
+									<input id="ticketdate" name="ticketdate" value="" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">发票号：</label>
+								<div class="col-sm-8">
+									<input id="invoicenumber" name="invoicenumber" value="" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">SBI号：</label>
+								<div class="col-sm-8">
+									<input id="sbi" name="sbi" value="6708490" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">生成日期：</label>
+								<div class="col-sm-8">
+									<input id="createtime" name="createtime" value="2016-08-24" class="form-control" type="text">
+								</div>
+							</div>
+														<!--<div class="form-group">
+								<label class="col-sm-3 control-label">预留1：</label>
+								<div class="col-sm-8">
+									<input id="reseve1" name="reseve1" th:value="${sbi.reseve1}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">预留2：</label>
+								<div class="col-sm-8">
+									<input id="reseve2" name="reseve2" th:value="${sbi.reseve2}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">预留3：</label>
+								<div class="col-sm-8">
+									<input id="reseve3" name="reseve3" th:value="${sbi.reseve3}" class="form-control" type="text">
+								</div>
+							</div>-->
+																					<div class="form-group">
+								<div class="col-sm-8 col-sm-offset-3">
+									<button type="submit" class="btn btn-primary">提交</button>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+	</div>
+	</div>
+	<div th:include="system/sbi/include::footer"></div>
+	<script type="text/javascript" src="/js/appjs/system/sbi/edit.js">
+	</script>
+</body>
+</html>

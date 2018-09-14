@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!--360浏览器优先以webkit内核解析-->
+    <title></title>
+
+    <link rel="shortcut icon" href="favicon.ico"> <link href="css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="css/font-awesome.css?v=4.4.0" rel="stylesheet">
+
+    <link href="css/animate.css" rel="stylesheet">
+    <link href="css/style.css?v=4.1.0" rel="stylesheet">
+
+
+</head>
+
+<body class="gray-bg">
+<div class="wrapper wrapper-content">
+    <div class="row">
+        <div class="col-sm-4">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>系统介绍</h5>
+                </div>
+                <div class="ibox-content">
+                    <!--<p>财务人事管理系统是由 <strong>无锡萨弗特智能科技有限公司</strong> 为 <strong>上海杰盛立业网络科技有限公司</strong>
+                        定制开发的一款后台管理系统软件，促进公司人事、发票、PO/SBI等办公管理。</p>-->
+                    <p>系统功能：</p>
+                    <ol>
+                        <li>角色管理、机构管理、账号管理</li>
+                        <li>发票查重</li>
+                        <li>PO/SBI管理</li>
+                    </ol>
+                </div>
+            </div>
+            <div class="">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>更新日志</h5>
+                    </div>
+                    <div class="ibox-content no-padding">
+                        <div class="panel-body">
+                            <div class="panel-group" id="version">
+
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h5 class="panel-title">
+                                            <a data-toggle="collapse" data-parent="#version" href="#v109">Debug v1.0.9</a><code class="pull-right">2018.09.13</code>
+                                        </h5>
+                                    </div>
+                                    <div id="v109" class="panel-collapse collapse in">
+                                        <div class="panel-body">
+                                            <ol>
+                                                <li>优化浏览器收藏网址，再次登录提示服务器错误问题</li>
+                                                <li>优化数据列表切换到第X页后搜索数据显示未查到数据问题</li>
+                                                <li>优化发票查重页面显示问题</li>
+                                                <li>优化发票查重发票报销时间、发票状态查询显示等</li>
+                                                <li>优化修改密码页面文字提示、明文显示等</li>
+                                                <li>优化PO数据导出表格样式、宋体、行高、单元格类型等</li>
+                                                <li>优化其他显示页面细节问题</li>
+                                            </ol>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h5 class="panel-title">
+                                            <a data-toggle="collapse" data-parent="#version" href="#v108">Debug v1.0.8</a><code class="pull-right">2018.09.12</code>
+                                        </h5>
+                                    </div>
+                                    <div id="v108" class="panel-collapse collapse">
+                                        <div class="panel-body">
+                                            <ol>
+                                                <li>优化双击删除问题</li>
+                                                <li>发票查重页面默认显示正常发票</li>
+                                                <li>发票查重时新增重复发票，之前正常的发票状态也是重复</li>
+                                                <li>查询重复发票时只显示重复发票，不显示删除发票</li>
+                                            </ol>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h5 class="panel-title">
+                                            <a data-toggle="collapse" data-parent="#version" href="#v107">Debug v1.0.7</a><code class="pull-right">2018.09.11</code>
+                                        </h5>
+                                    </div>
+                                    <div id="v107" class="panel-collapse collapse">
+                                        <div class="panel-body">
+                                            <ol>
+                                                <li>导入文件时，模板之外的文件不支持导入</li>
+                                                <li>超级管理员角色不可编辑</li>
+                                            </ol>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h5 class="panel-title">
+                                            <a data-toggle="collapse" data-parent="#version" href="#v106">Debug v1.0.6</a><code class="pull-right">2018.09.10</code>
+                                        </h5>
+                                    </div>
+                                    <div id="v106" class="panel-collapse collapse">
+                                        <div class="panel-body">
+                                            <ol>
+                                                <li>修改PO不可重复导入</li>
+                                                <li>系统中‘账号’修改为‘账号（工号）’</li>
+                                                <li>修改PO导入时时间转换错误</li>
+                                                <li>修改发票编号最小8位</li>
+                                                <li>修改批量删除发票伪删除</li>
+                                                <li>优化session失效退出登录</li>
+                                                <li>优化首页发票个数不统计已删除发票</li>
+                                            </ol>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h5 class="panel-title">
+                                            <a data-toggle="collapse" data-parent="#version" href="#v105">Debug v1.0.5</a><code class="pull-right">2018.09.09</code>
+                                        </h5>
+                                    </div>
+                                    <div id="v105" class="panel-collapse collapse">
+                                        <div class="panel-body">
+                                            <ol>
+                                                <li>修改PO数据为详细数据（以工作内容、单价为准）</li>
+                                                <li>修改PO导出文件名为搜索时间段</li>
+                                                <li>修改正sbi导入时按每个PO占1行导入</li>
+                                                <li>sbi支持多文件导入</li>
+                                                <li>新增PO导入基础数据功能，删除SBI基础数据导入功能</li>
+                                                <li>新增sbi导出包含PO数据模板</li>
+                                                <li>解决数据过长时操作按钮显示变形问题</li>
+                                            </ol>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h5 class="panel-title">
+                                            <a data-toggle="collapse" data-parent="#version" href="#v104">Debug v1.0.4</a><code class="pull-right">2018.09.05</code>
+                                        </h5>
+                                    </div>
+                                    <div id="v104" class="panel-collapse collapse">
+                                        <div class="panel-body">
+                                            <ol>
+                                                <li>优化发票导入时，新增账号工号为空不可导入</li>
+                                                <li>优化PO数据可绑定多个sbi数据</li>
+                                                <li>优化PO数据导入校验</li>
+                                                <li>优化发票扫码查重结果不准确问题</li>
+                                                <li>优化修改密码页面密码校验</li>
+                                                <li>优化其他页面显示问题</li>
+                                            </ol>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h5 class="panel-title">
+                                            <a data-toggle="collapse" data-parent="#version" href="#v103">Debug v1.0.3</a><code class="pull-right">2018.09.03</code>
+                                        </h5>
+                                    </div>
+                                    <div id="v103" class="panel-collapse collapse">
+                                        <div class="panel-body">
+                                            <ol>
+                                                <li>优化账号显示、账号机构选择、菜单排布等</li>
+                                                <li>优化发票查重新增时可根据工号选择员工</li>
+                                                <li>优化发票查重新增时可直接添加新员工到系统</li>
+                                                <li>优化发票查重导入基础数据时，存在重复发票不可导入</li>
+                                                <li>增加发票查重导入基础数据时，新员工直接添加到系统</li>
+                                                <li>优化PO数据金额不计算不准确问题</li>
+                                                <li>优化其他页面显示问题</li>
+                                            </ol>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h5 class="panel-title">
+                                            <a data-toggle="collapse" data-parent="#version" href="#v102">Debug v1.0.2</a><code class="pull-right">2018.08.28</code>
+                                        </h5>
+                                    </div>
+                                    <div id="v102" class="panel-collapse collapse">
+                                        <div class="panel-body">
+                                            <ol>
+                                                <li>优化在事件选择框扫描发票二维码显示数据个数为undefined</li>
+                                                <li>优化空Excel导入报错</li>
+                                            </ol>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h5 class="panel-title">
+                                            <a data-toggle="collapse" data-parent="#version" href="#v101">Debug v1.0.1</a><code class="pull-right">2018.08.23</code>
+                                        </h5>
+                                    </div>
+                                    <div id="v101" class="panel-collapse collapse">
+                                        <div class="panel-body">
+                                            <ol>
+                                                <li>优化账号管理，新增时未选择机构也能添加成功账号</li>
+                                                <li>优化账号管理，点击未选择机构的账号报500</li>
+                                                <li>优化不可删除超级管理员角色</li>
+                                                <li>优化角色名不可重复</li>
+                                                <li>隐藏角色列id</li>
+                                                <li>优化编辑角色直接点击保存提示角色名已存在</li>
+                                            </ol>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h5 class="panel-title">
+                                            <a data-toggle="collapse" data-parent="#version" href="#v100">Debug v1.0.0</a><code class="pull-right">2018.08.22</code>
+                                        </h5>
+                                    </div>
+                                    <div id="v100" class="panel-collapse collapse">
+                                        <div class="panel-body">
+                                            <div class="alert alert-warning">此版本是一个初始版本，主要是根据需求开发基本功能。</div>
+                                            <!--                       <ol>
+                                                                       <li>增加不支持IE8的页面提示</li>
+                                                                       <li>修复页面链接和表单提交默认在新窗口中打开的问题</li>
+                                                                       <li>更新suggest插件，修复错位问题</li>
+                                                                       <li>升级bootstrap版本到3.3.6版本</li>
+                                                                       <li>升级layer到2.1版本</li>
+                                                                       <li>升级echarts到2.2.7版本</li>
+                                                                       <li>升级webuploader到0.1.5版本</li>
+                                                                       <li>修复网络条件不好情况下，页面加载提示遮挡页面无法操作的问题</li>
+                                                                   </ol>-->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div shiro:hasPermission="system:check:check" class="col-sm-4">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <span class="label label-success pull-right">月</span>
+                    <h5>发票</h5>
+                </div>
+                <div class="ibox-content">
+                    <h1 class="no-margins" th:text="${check.count}"></h1>
+                    <div class="stat-percent font-bold text-success">
+                        <span  th:text="${check.dep}"></span>
+                        <i th:if=" ${check.code} eq '0'" class="fa fa-level-down"></i>
+                        <i th:if=" ${check.code} eq '1'" class="fa fa-level-up"></i>
+                    </div>
+                    <small>本月内报销发票</small>
+                </div>
+            </div>
+        </div>
+        <div shiro:hasPermission="system:po:po" class="col-sm-4">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <span class="label label-primary pull-right">周</span>
+                    <h5>PO</h5>
+                </div>
+                <div class="ibox-content">
+                    <h1 class="no-margins" th:text="${po.count}"></h1>
+                    <div class="stat-percent font-bold text-success">
+                        <span  th:text="${po.dep}"></span>
+                        <i th:if=" ${po.code} eq '0'" class="fa fa-level-down"></i>
+                        <i th:if=" ${po.code} eq '1'" class="fa fa-level-up"></i>
+                    </div>
+                    <small>周一到周日新订单</small>
+                </div>
+            </div>
+        </div>
+        <div shiro:hasPermission="system:sbi:sbi" class="col-sm-4">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <span class="label label-primary pull-right">周</span>
+                    <h5>SBI</h5>
+                </div>
+                <div class="ibox-content">
+                    <h1 class="no-margins" th:text="${sbi.count}"></h1>
+                    <div class="stat-percent font-bold text-success">
+                        <span  th:text="${sbi.dep}"></span>
+                        <i th:if=" ${sbi.code} eq '0'" class="fa fa-level-down"></i>
+                        <i th:if=" ${sbi.code} eq '1'" class="fa fa-level-up"></i>
+                    </div>
+                    <small>周一到周日新订单</small>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<!-- 全局js -->
+<script src="js/jquery.min.js?v=2.1.4"></script>
+<script src="js/bootstrap.min.js?v=3.3.6"></script>
+<script src="js/plugins/layer/layer.min.js"></script>
+
+<!-- 自定义js -->
+<script src="js/content.js"></script>
+
+<!-- 欢迎信息 -->
+<script src="js/welcome.js"></script>
+</body>
+</html>

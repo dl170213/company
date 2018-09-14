@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<head th:include="system/userdetail/include :: header"></head>
+<body class="gray-bg">
+	<div class="wrapper wrapper-content ">
+		<div class="col-sm-12"  style="margin-top: -15px;">
+			<div class="ibox">
+				<div class="ibox-body">
+					<div class="fixed-table-toolbar">
+						<div class="columns pull-left">
+							<button shiro:hasPermission="system:userdetail:add" type="button" class="btn btn-primary input-sm fims-padding-sm-14"
+									onclick="add()" >
+								<i class="fa fa-plus" aria-hidden="true"></i>添加
+							</button>
+							<button  type="button" class="btn btn-success input-sm fims-padding-sm-14" id="test1"
+									onclick="download()">
+								<i class="fa fa-download"></i>导入
+							</button>
+							<button type="button" class="btn btn-info input-sm fims-padding-sm-14"
+									onclick="upload()">
+								<i class="fa fa-upload" aria-hidden="true"></i>导出
+							</button>
+							<button shiro:hasPermission="system:userdetail:remind" type="button" class="btn btn-default input-sm fims-padding-sm-14"
+									onclick="remindSetting()">
+								<i class="fa fa-cog" aria-hidden="true"></i>提醒设置
+							</button>
+							<button type="button" class="btn btn-info input-sm fims-padding-sm-14" onclick="oneupload()"
+									data-toggle="tooltip" data-placement="left" title="导出最近一周新近离职员工数据">
+								<i class="fa fa-upload" aria-hidden="true"></i>一键导出
+							</button>
+							<button shiro:hasPermission="system:userdetail:batchRemove" type="button" class="btn  btn-danger input-sm fims-padding-sm-14"
+									onclick="batchRemove_test()">
+								<i class="fa fa-trash" aria-hidden="true"></i>删除
+							</button>
+						</div>
+						<div class="columns pull-right searchmaTop searchmaLeft" >
+							<button class="btn btn-success input-sm fims-padding-sm-14" onclick="reLoad()">查询</button>
+						</div>
+						<div class="columns pull-right col-md-2 nopadding searchmaLeft">
+							<input id="searchName" type="text" class="form-control input-sm fims-padding-sm-14"
+								placeholder="请输入搜索内容" style="margin-top: 3px;font-size: 13px;">
+						</div>
+						<div class="columns pull-right col-md-2 nopadding">
+							<input id="searchtime" name="searchtime" class="form-control input-sm fims-padding-sm-14" type="text"
+								   placeholder="请选择时间段" style="margin-top: 3px;font-size: 13px;">
+						</div>
+					</div>
+					<table id="exampleTable" data-mobile-responsive="true" data-row-style="rowStyle">
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--shiro控制bootstraptable行内按钮看见性 来自caocao的创新方案 -->
+		<div>
+			<script type="text/javascript">
+				var s_edit_h = 'hidden';
+				var s_remove_h = 'hidden';
+				var s_resetPwd_h = 'hidden';
+			</script>
+		</div>
+		<div shiro:hasPermission="system:userdetail:edit">
+			<script type="text/javascript">
+				s_edit_h = '';
+			</script>
+		</div>
+		<div shiro:hasPermission="system:userdetail:remove">
+			<script type="text/javascript">
+				var s_remove_h = '';
+			</script>
+		</div>
+		<div shiro:hasPermission="system:userdetail:resetPwd">
+			<script type="text/javascript">
+				var s_resetPwd_h = '';
+			</script>
+		</div>
+	</div>
+	<div th:include="system/userdetail/include :: footer"></div>
+	<script src="/js/layui.js"></script>
+	<script type="text/javascript" src="/js/appjs/system/userdetail/userdetail.js"></script>
+</body>
+</html>

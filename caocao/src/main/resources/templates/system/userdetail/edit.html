@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<head th:include="system/userdetail/include :: header"></head>
+<body class="gray-bg">
+	<div class="wrapper wrapper-content ">
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="ibox float-e-margins">
+					<div class="ibox-content">
+						<form class="form-horizontal m-t" id="signupForm" >
+							<div class="form-group">
+								<label class="col-sm-2 control-label col-sm-20"><span style="color: red">*</span>工号：</label>
+								<div class="col-sm-3">
+									<input id="username" name="username" th:value="${userdetail.username}" class="form-control"
+										   type="text" readonly>
+								</div>
+								<label class="col-sm-2 control-label"><span style="color: red">*</span>状态：</label>
+								<div class="col-sm-3">
+									<select id="status" name="status" class="form-control">
+										<option value="1">在职</option>
+										<option value="2">离职</option>
+										<option value="3">试用</option>
+									</select>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-2 control-label col-sm-20"><span style="color: red">*</span>姓名：</label>
+								<div class="col-sm-3">
+									<input id="name" name="name" class="form-control" type="text"
+										   th:value="${userdetail.name}">
+								</div>
+								<label class="col-sm-2 control-label"><span style="color: red">*</span>机构：</label>
+								<div class="col-sm-3">
+									<input  class="form-control" type="text" readonly placeholder="请选择机构"
+											th:value="${userdetail.deptname}">
+								</div>
+
+							</div>
+
+							<div class="form-group">
+								<label class="col-sm-2 control-label col-sm-20">手机：</label>
+								<div class="col-sm-3">
+									<input  class="form-control" type="text" th:value="${userdetail.tel}">
+								</div>
+								<label class="col-sm-2 control-label">邮箱：</label>
+								<div class="col-sm-3">
+									<input  class="form-control" type="text" th:value="${userdetail.mail}">
+								</div>
+
+							</div>
+
+							<!-- 基础信息 -->
+							<div class="form-group">
+								<label class="col-sm-2 control-label col-sm-20">项目：</label>
+								<div class="col-sm-3">
+									<!--<select id="projectId" name="projectId" class="form-control">
+									<option th:text="${userdetail.project}"></option>
+								</select>-->
+									<div class="input-group">
+										<input type="text" class="form-control" th:value="${userdetail.project}" id="testNoBtn">
+										<div class="input-group-btn">
+											<button type="button" class="btn btn-white dropdown-toggle" data-toggle="dropdown">
+												<span class="caret"></span>
+											</button>
+											<ul class="dropdown-menu dropdown-menu-right" role="menu">
+											</ul>
+										</div>
+										<!-- /btn-group -->
+									</div>
+									<!--<input id="projectId" name="projectId" class="form-control" type="text"
+										   readonly placeholder="请选择项目" th:value="${userdetail.username}">-->
+								</div>
+								<label class="col-sm-2 control-label">入职时间：</label>
+								<div class="col-sm-3">
+									<input id="entryTime" name="entryTime" class="laydate-icon layer-date form-control" type="text"
+										   th:value="${userdetail.entryTime}==null?null:${#dates.format(userdetail.entryTime,'yyyy-MM-dd HH:mm:ss')}" readonly="readonly" placeholder="请选择入职时间">
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-2 control-label col-sm-20">转正时间：</label>
+								<div class="col-sm-3">
+									<input id="positiveTime" name="positiveTime" class="laydate-icon layer-date form-control" type="text"
+										   th:value="${userdetail.positiveTime}==null?null:${#dates.format(userdetail.positiveTime,'yyyy-MM-dd HH:mm:ss')}" readonly placeholder="请选择转正时间">
+								</div>
+								<label class="col-sm-2 control-label">离职时间：</label>
+								<div class="col-sm-3">
+									<input id="leaveTime" name="leaveTime" class="laydate-icon layer-date form-control" type="text"
+										   th:value="${userdetail.leaveTime}==null?null:${#dates.format(userdetail.leaveTime,'yyyy-MM-dd HH:mm:ss')}" readonly placeholder="请选择离职时间">
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-2 control-label col-sm-20">职务：</label>
+								<div class="col-sm-3">
+									<input id="duty" name="duty" class="form-control" type="text" th:value="${userdetail.duty}">
+								</div>
+								<label class="col-sm-2 control-label">岗位级别：</label>
+								<div class="col-sm-3">
+									<input id="joblevel" name="joblevel" class="form-control" type="text" th:value="${userdetail.joblevel}">
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-2 control-label col-sm-20">身份证号：</label>
+								<div class="col-sm-3">
+									<input id="idnumber" name="idnumber" class="form-control" type="text" th:value="${userdetail.idnumber}">
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-2 control-label col-sm-20">身份证地址：</label>
+								<div class="col-sm-8">
+									<input id="idaddress" name="idaddress" class="form-control" type="text" th:value="${userdetail.idaddress}">
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-2 control-label col-sm-20">毕业学校：</label>
+								<div class="col-sm-3">
+									<input id="graduateschool" name="graduateschool" class="form-control" type="text" th:value="${userdetail.graduateschool}">
+								</div>
+								<label class="col-sm-2 control-label">专业：</label>
+								<div class="col-sm-3">
+									<input id="major" name="major" class="form-control" type="text" th:value="${userdetail.major}">
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-2 control-label col-sm-20">学历：</label>
+								<div class="col-sm-3">
+									<input id="education" name="education" class="form-control" type="text" th:value="${userdetail.education}">
+								</div>
+								<label class="col-sm-2 control-label">证书编号：</label>
+								<div class="col-sm-3">
+									<input id="diploma" name="diploma" class="form-control" type="text" th:value="${userdetail.diploma}">
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-2 control-label col-sm-20">合同签订日期：</label>
+								<div class="col-sm-3">
+									<input id="contracttime" name="contracttime" class=" laydate-icon layer-date form-control" type="text"
+										   readonly placeholder="请选择合同签订日期"
+										   th:value="${userdetail.contracttime}==null?null:${#dates.format(userdetail.contracttime,'yyyy-MM-dd HH:mm:ss')}">
+								</div>
+								<label class="col-sm-2 control-label ">毕业年份：</label>
+								<div class="col-sm-3">
+									<input id="graduateyear" name="graduateyear" class="laydate-icon layer-date form-control" type="text"
+										   th:value="${userdetail.graduateyear}==null?null:${#dates.format(userdetail.graduateyear,'yyyy-MM')}"
+										   readonly placeholder="请选择毕业年份">
+								</div>
+							</div>
+
+							<!-- 工资信息 -->
+							<div class="form-group">
+								<label class="col-sm-2 control-label col-sm-20">基本工资：</label>
+								<div class="col-sm-3">
+									<input class="form-control" type="text" th:value="${userdetail.basewage}">
+								</div>
+								<label class="col-sm-2 control-label ">试用期工资：</label>
+								<div class="col-sm-3">
+									<input class="form-control" type="text" th:value="${userdetail.probationwage}">
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-2 control-label col-sm-20">工资卡号：</label>
+								<div class="col-sm-3">
+									<input class="form-control" type="text" th:value="${userdetail.wagecardnumber}">
+								</div>
+								<label class="col-sm-2 control-label">联行号：</label>
+								<div class="col-sm-3">
+									<input class="form-control" type="text" th:value="${userdetail.coupletnumber}">
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-2 control-label col-sm-20">开户行名称：</label>
+								<div class="col-sm-8">
+									<input class="form-control" type="text" th:value="${userdetail.openbank}">
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-2 control-label col-sm-20">第二银行卡号：</label>
+								<div class="col-sm-3">
+									<input class="form-control" type="text" th:value="${userdetail.wagecardnumber1}">
+								</div>
+								<label class="col-sm-2 control-label">第二联行号：</label>
+								<div class="col-sm-3">
+									<input class="form-control" type="text" th:value="${userdetail.coupletnumber1}">
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-2 control-label col-sm-20">第二开户行名称：</label>
+								<div class="col-sm-8">
+									<input class="form-control" type="text" th:value="${userdetail.openbank1}">
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-2 control-label col-sm-20">居住地：</label>
+								<div class="col-sm-8">
+									<input  class="form-control" type="text" >
+								</div>
+							</div>
+
+							<!--<div class="form-group">
+								<label class="col-sm-2 control-label col-sm-20"><span style="color: red">*</span>状态：</label>
+								<div class="col-sm-8">
+									<label class="radio-inline">
+										<input type="radio" name="status" value="1" /> 在职</label>
+									<label class="radio-inline">
+										<input type="radio" name="status" value="0" /> 离职</label>
+									<label class="radio-inline">
+										<input type="radio" name="status" value="2" /> 试用</label>
+								</div>
+							</div>-->
+							<div class="form-group">
+								<label class="col-sm-2 control-label col-sm-20"><span style="color: red">*</span>角色：</label>
+								<div class="col-sm-8">
+									<div class="checkbox i-checks">
+										<label  class="checkbox-inline">
+											<input name="role" type="checkbox" value="1">超级管理员</label>
+										<label  class="checkbox-inline">
+											<input name="role" type="checkbox" value="1" checked>人事管理员</label>
+										<label  class="checkbox-inline">
+											<input name="role" type="checkbox" value="1">财务管理员</label>
+										<label  class="checkbox-inline">
+											<input name="role" type="checkbox" value="1">项目经理</label>
+									</div>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label class="col-sm-2 control-label col-sm-20">备注：</label>
+								<div class="col-sm-8">
+									<textarea id="remark" name="remark" class="form-control" type="text" th:text="${userdetail.remark}"></textarea>
+								</div>
+							</div><!--
+														<div class="form-group">
+								<label class="col-sm-3 control-label">预留1：</label>
+								<div class="col-sm-8">
+									<input id="reseve1" name="reseve1" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">
+								<label class="col-sm-3 control-label">预留2：</label>
+								<div class="col-sm-8">
+									<input id="reseve2" name="reseve2" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">
+								<label class="col-sm-3 control-label">预留3：</label>
+								<div class="col-sm-8">
+									<input id="reseve3" name="reseve3" class="form-control" type="text">
+								</div>
+							</div>-->
+							<div class="form-group">
+								<label class="col-sm-2 control-label col-sm-20"></label>
+								<div class="col-sm-8 ">
+									<button type="submit" class="btn btn-primary">提交</button>
+								</div>
+							</div>
+						</form>
+
+					</div>
+					<div class="ibox float-e-margins">
+						<div class="ibox-title">
+							<h5>合同记录</h5>
+							<div class="ibox-tools">
+								<a class="collapse-link">
+									<i class="fa fa-chevron-up"></i>
+								</a>
+								<!--<a class="dropdown-toggle" data-toggle="dropdown" href="timeline.html#">
+									<i class="fa fa-wrench"></i>
+								</a>
+								<ul class="dropdown-menu dropdown-user">
+									<li><a href="timeline.html#">选项1</a>
+									</li>
+									<li><a href="timeline.html#">选项2</a>
+									</li>
+								</ul>
+								<a class="close-link">
+									<i class="fa fa-times"></i>
+								</a>-->
+							</div>
+						</div>
+
+						<div class="ibox-content timeline">
+							<div class="timeline-item">
+								<div class="row" style="height: 100px;">
+									<div class="col-xs-3 date">
+										<i class="fa fa-briefcase"></i>
+									</div>
+									<div class="col-xs-7 content no-top-border">
+										<p class="m-b-xs"><strong>签订合同</strong>
+										</p><small class="text-navy">2014-05-30</small>
+									</div>
+								</div>
+							</div>
+							<div class="timeline-item">
+								<div class="row" style="height: 100px;">
+									<div class="col-xs-3 date">
+										<i class="fa fa-briefcase"></i>
+									</div>
+									<div class="col-xs-7 content no-top-border">
+										<p class="m-b-xs"><strong>签订合同</strong>
+										</p><small class="text-navy">2015-05-30</small>
+									</div>
+								</div>
+							</div>
+							<div class="timeline-item">
+								<div class="row" style="height: 100px;">
+									<div class="col-xs-3 date">
+										<i class="fa fa-briefcase"></i>
+									</div>
+									<div class="col-xs-7 content no-top-border">
+										<p class="m-b-xs"><strong>签订合同</strong>
+										</p><small class="text-navy">2016-05-30</small>
+									</div>
+								</div>
+							</div>
+							<div class="timeline-item">
+								<div class="row" >
+									<div class="col-xs-3 date">
+										<i class="fa fa-briefcase"></i>
+									</div>
+									<div class="col-xs-7 content no-top-border">
+										<p class="m-b-xs"><strong>签订合同</strong>
+										</p><small class="text-navy">2017-05-30</small>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="form-group" >
+						<label class="col-sm-2 control-label col-sm-20"></label>
+						<div class="col-sm-8 ">
+							<div id="vertical-timeline" class="vertical-container light-timeline">
+								<div class="vertical-timeline-block">
+									<div class="vertical-timeline-icon navy-bg">
+										<i class="fa fa-child"></i>
+									</div>
+
+									<div class="vertical-timeline-content">
+										<h2>新人入职</h2>
+										<p>进入公司试用
+										</p>
+										<!--<a href="#" class="btn btn-sm btn-primary"> 更多信息</a>-->
+										<span class="vertical-date">
+                                        <small>2016年3月15日</small>
+                                    </span>
+									</div>
+								</div>
+
+								<div class="vertical-timeline-block">
+									<div class="vertical-timeline-icon blue-bg">
+										<i class="fa fa-briefcase"></i>
+									</div>
+
+									<div class="vertical-timeline-content">
+										<h2>试用转正</h2>
+										<p>由试用期转为正式员工，薪资由4000调整至6000。
+										</p>
+										<!--<a href="#" class="btn btn-sm btn-primary"> 更多信息</a>-->
+										<span class="vertical-date">
+                                        <small>2016年5月15日</small>
+                                    </span>
+									</div>
+								</div>
+
+								<div class="vertical-timeline-block">
+									<div class="vertical-timeline-icon lazur-bg">
+										<i class="fa fa-briefcase"></i>
+									</div>
+
+									<div class="vertical-timeline-content">
+										<h2>职位变更</h2>
+										<p>由正式员工转为项目经理，薪资由6000调整至8000。</p>
+										<!--<a href="#" class="btn btn-sm btn-info">更多</a>-->
+										<span class="vertical-date">
+										<small>2017年5月30日</small>
+									</span>
+									</div>
+								</div>
+
+								<div class="vertical-timeline-block">
+									<div class="vertical-timeline-icon yellow-bg">
+										<i class="fa fa-edit"></i>
+									</div>
+
+									<div class="vertical-timeline-content">
+										<h2>资料变更</h2>
+										<p>手机号由18000752146变为13300752146</p>
+										<span class="vertical-date">
+										<small>2017年6月30日</small>
+									</span>
+									</div>
+								</div>
+
+								<div class="vertical-timeline-block">
+									<div class="vertical-timeline-icon lazur-bg">
+										<i class="fa fa-user-times"></i>
+									</div>
+
+									<div class="vertical-timeline-content">
+										<h2>离职</h2>
+										<p>离开公司</p>
+										<span class="vertical-date">
+										<small>2017年12月30日</small>
+									</span>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+	</div>
+	</div>
+	<div th:include="system/userdetail/include::footer"></div>
+	<script type="text/javascript" src="/js/appjs/system/userdetail/edit.js">
+	</script>
+</body>
+</html>

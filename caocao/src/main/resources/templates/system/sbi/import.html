@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<link href="/css/layui.css" rel="stylesheet">
+<head th:include="system/sbi/include :: header"></head>
+<body class="gray-bg">
+<div class="wrapper wrapper-content ">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-content">
+                    <form class="form-horizontal m-t" id="signupForm">
+
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">模板：</label>
+                            <div class="col-sm-8">
+                                <a href="/exceltemplates/SBI数据导入模板.xlsx">SBI数据导入模板</a>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">文件：</label>
+                            <div class="col-sm-8">
+                                <!--<input type="file" class="" width="60%" id="files" style="float: left;margin-top: 6px;"/>-->
+                                <button type="button" class="layui-btn" id="upload">
+                                    <i class="fa fa-upload" aria-hidden="true"></i> 请选择需要上传的文件
+                                </button>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">进度：</label>
+                            <div class="col-sm-8">
+                                <span id="file_status">未开始上传</span>
+                            </div>
+                        </div>
+                        <div id="errorMsgDiv" class="form-group hidden" >
+                            <label class="col-sm-3 control-label">错误信息：</label>
+                            <div class="col-sm-8">
+                                <textarea id="error_msg" class="form-control" style="height: 200px;"
+                                          readonly></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group" hidden>
+                            <label class="col-sm-3 control-label">失败文件：</label>
+                            <div class="col-sm-8">
+                                <a href="/exceltemplates/ceshi.xls">点击下载失败日志</a>
+                            </div>
+                        </div>
+                        <div class="form-group" >
+                            <div class="col-sm-8 col-sm-offset-3">
+                                <button id="closebtn" type="button" class="btn btn-default" onclick="closeimport()">关闭</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div th:include="system/sbi/include::footer"></div>
+<script src="/js/layui.js"></script>
+<script type="text/javascript" src="/js/appjs/system/sbi/import.js">
+</script>
+</body>
+</html>

@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.fims.system.dao.PoDao">
+
+	<select id="get" resultType="com.fims.system.domain.PoDO">
+		select p.`id`,p.`pmid`,p.`pm`,p.`sp`,p.`wbs`,p.`count`,p.`workbody`,p.`pice`,p.`total`,p.`customer`,p.`worktype`,p.`sbi`,p.`receiveddate`,p.`reseve1`,p.`reseve2`,p.`reseve3` from po p
+		where p.id = #{value}
+	</select>
+
+	<select id="getByNumber" resultType="com.fims.system.domain.PoDO">
+		select `id`,`pmid`,`pm`,`sp`,`wbs`,`count`,`workbody`,`pice`,`total`,`customer`,`worktype`,`sbi`,`receiveddate`,`reseve1`,`reseve2`,`reseve3` from po where reseve1 = #{value}
+	</select>
+
+	<select id="getByNumberAndSBInull" resultType="com.fims.system.domain.PoDO">
+		select `id`,`pmid`,`pm`,`sp`,`wbs`,`count`,`workbody`,`pice`,`total`,`customer`,`worktype`,`sbi`,`receiveddate`,`reseve1`,`reseve2`,`reseve3` from po where reseve1 = #{reseve1}
+		AND sbi IS NULL AND workbody = #{workbody}
+	</select>
+
+	<select id="getPoSum" resultType="String">
+		select sum(total) total from po where reseve1 = #{value}
+	</select>
+
+	<select id="getBySbi" resultType="com.fims.system.domain.PoDO">
+		select p.`id`,p.`pmid`,p.`pm`,p.`sp`,p.`wbs`,p.`count`,p.`workbody`,p.`pice`,p.`total`,p.`customer`,p.`worktype`,p.`sbi`,p.`receiveddate`,p.`reseve1`,p.`reseve2`,p.`reseve3` from po p
+		where p.sbi = #{value}
+	</select>
+
+	<select id="list" resultType="com.fims.system.domain.PoDO">
+		select p.`id`,p.`pmid`,p.`pm`,p.`sp`,p.`wbs`,p.`count`,p.`workbody`,p.`pice`,p.`total`,p.`customer`,p.`worktype`,p.`sbi`,p.`receiveddate`,p.`reseve1`,p.`reseve2`,p.`reseve3` from po p
+        <where>  
+		  		  <if test="id != null and id != ''"> and p.id = #{id} </if>
+		  		  <if test="pmid != null and pmid != ''"> and p.pmid = #{pmid} </if>
+		  		  <if test="pm != null and pm != ''"> and p.pm = #{pm} </if>
+		  		  <if test="sp != null and sp != ''"> and p.sp = #{sp} </if>
+		  		  <if test="wbs != null and wbs != ''"> and p.wbs = #{wbs} </if>
+		  		  <if test="count != null and count != ''"> and p.count = #{count} </if>
+		  		  <if test="workbody != null and workbody != ''"> and p.workbody = #{workbody} </if>
+		  		  <if test="pice != null and pice != ''"> and p.pice = #{pice} </if>
+		  		  <if test="total != null and total != ''"> and p.total = #{total} </if>
+		  		  <if test="customer != null and customer != ''"> and p.customer = #{customer} </if>
+		  		  <if test="worktype != null and worktype != ''"> and p.worktype = #{worktype} </if>
+		  		  <if test="sbi != null and sbi != ''"> and p.sbi = #{sbi} </if>
+		  		  <if test="receiveddate != null and receiveddate != ''"> and p.receiveddate = #{receiveddate} </if>
+		  		  <if test="reseve1 != null and reseve1 != ''"> and p.reseve1 = #{reseve1} </if>
+		  		  <if test="reseve2 != null and reseve2 != ''"> and p.reseve2 = #{reseve2} </if>
+		  		  <if test="reseve3 != null and reseve3 != ''"> and p.reseve3 = #{reseve3} </if>
+					<if test="searchName != null and searchName != ''"> and
+						(( p.pm LIKE concat('%',#{searchName},'%')) or ( p.sp LIKE concat('%',#{searchName},'%')) or
+						( p.wbs LIKE concat('%',#{searchName},'%')) or ( p.workbody LIKE concat('%',#{searchName},'%')) or
+						( p.customer LIKE concat('%',#{searchName},'%')) or ( p.worktype LIKE concat('%',#{searchName},'%')) or
+						( p.sbi LIKE concat('%',#{searchName},'%')) or ( p.reseve1 LIKE concat('%',#{searchName},'%')))
+					</if>
+					<if test="starttime != null and starttime != ''">
+						and (p.receiveddate &gt;= #{starttime} and p.receiveddate &lt;= #{endtime})
+					</if>
+		  		</where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+			<otherwise>
+                order by p.reseve1 desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="count" resultType="int">
+		select count(*) from po p
+		<where>
+			<if test="id != null and id != ''"> and p.id = #{id} </if>
+			<if test="pmid != null and pmid != ''"> and p.pmid = #{pmid} </if>
+			<if test="pm != null and pm != ''"> and p.pm = #{pm} </if>
+			<if test="sp != null and sp != ''"> and p.sp = #{sp} </if>
+			<if test="wbs != null and wbs != ''"> and p.wbs = #{wbs} </if>
+			<if test="count != null and count != ''"> and p.count = #{count} </if>
+			<if test="workbody != null and workbody != ''"> and p.workbody = #{workbody} </if>
+			<if test="pice != null and pice != ''"> and p.pice = #{pice} </if>
+			<if test="total != null and total != ''"> and p.total = #{total} </if>
+			<if test="customer != null and customer != ''"> and p.customer = #{customer} </if>
+			<if test="worktype != null and worktype != ''"> and p.worktype = #{worktype} </if>
+			<if test="sbi != null and sbi != ''"> and p.sbi = #{sbi} </if>
+			<if test="receiveddate != null and receiveddate != ''"> and p.receiveddate = #{receiveddate} </if>
+			<if test="reseve1 != null and reseve1 != ''"> and p.reseve1 = #{reseve1} </if>
+			<if test="reseve2 != null and reseve2 != ''"> and p.reseve2 = #{reseve2} </if>
+			<if test="reseve3 != null and reseve3 != ''"> and p.reseve3 = #{reseve3} </if>
+			<if test="searchName != null and searchName != ''"> and
+				(( p.pm LIKE concat('%',#{searchName},'%')) or ( p.sp LIKE concat('%',#{searchName},'%')) or
+				( p.wbs LIKE concat('%',#{searchName},'%')) or ( p.workbody LIKE concat('%',#{searchName},'%')) or
+				( p.customer LIKE concat('%',#{searchName},'%')) or ( p.worktype LIKE concat('%',#{searchName},'%')) or
+				( p.sbi LIKE concat('%',#{searchName},'%')) or ( p.reseve1 LIKE concat('%',#{searchName},'%')))
+			</if>
+			<if test="starttime != null and starttime != ''">
+				and (p.receiveddate &gt;= #{starttime} and p.receiveddate &lt;= #{endtime})
+			</if>
+		</where>
+	</select>
+
+	<select id="listSumTotal" resultType="com.fims.system.domain.PoDO">
+		select p.`id`,p.`pmid`,p.`pm`,p.`sp`,p.`wbs`,p.`count`,p.`workbody`,p.`pice`,p.`total`,p.`customer`,p.`worktype`,p.`sbi`,p.`receiveddate`,p.`reseve1`,p.`reseve2`,p.`reseve3` from po p
+		<where>
+			<if test="id != null and id != ''"> and p.id = #{id} </if>
+			<if test="pmid != null and pmid != ''"> and p.pmid = #{pmid} </if>
+			<if test="pm != null and pm != ''"> and p.pm = #{pm} </if>
+			<if test="sp != null and sp != ''"> and p.sp = #{sp} </if>
+			<if test="wbs != null and wbs != ''"> and p.wbs = #{wbs} </if>
+			<if test="count != null and count != ''"> and p.count = #{count} </if>
+			<if test="workbody != null and workbody != ''"> and p.workbody = #{workbody} </if>
+			<if test="pice != null and pice != ''"> and p.pice = #{pice} </if>
+			<if test="total != null and total != ''"> and p.total = #{total} </if>
+			<if test="customer != null and customer != ''"> and p.customer = #{customer} </if>
+			<if test="worktype != null and worktype != ''"> and p.worktype = #{worktype} </if>
+			<if test="sbi != null and sbi != ''"> and p.sbi = #{sbi} </if>
+			<if test="receiveddate != null and receiveddate != ''"> and p.receiveddate = #{receiveddate} </if>
+			<if test="reseve1 != null and reseve1 != ''"> and p.reseve1 = #{reseve1} </if>
+			<if test="reseve2 != null and reseve2 != ''"> and p.reseve2 = #{reseve2} </if>
+			<if test="reseve3 != null and reseve3 != ''"> and p.reseve3 = #{reseve3} </if>
+			<if test="searchName != null and searchName != ''"> and
+				(( p.pm LIKE concat('%',#{searchName},'%')) or ( p.sp LIKE concat('%',#{searchName},'%')) or
+				( p.wbs LIKE concat('%',#{searchName},'%')) or ( p.workbody LIKE concat('%',#{searchName},'%')) or
+				( p.customer LIKE concat('%',#{searchName},'%')) or ( p.worktype LIKE concat('%',#{searchName},'%')) or
+				( p.sbi LIKE concat('%',#{searchName},'%')))
+			</if>
+			<if test="starttime != null and starttime != ''">
+				and (p.receiveddate &gt;= #{starttime} and p.receiveddate &lt;= #{endtime})
+			</if>
+		</where>
+		<choose>
+			<when test="sort != null and sort.trim() != ''">
+				order by ${sort} ${order}
+			</when>
+			<otherwise>
+				order by p.id desc
+			</otherwise>
+		</choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+
+	<insert id="save" parameterType="com.fims.system.domain.PoDO" useGeneratedKeys="true" keyProperty="id">
+		insert into po
+		(
+			`pmid`, 
+			`pm`, 
+			`sp`, 
+			`wbs`, 
+			`count`, 
+			`workbody`, 
+			`pice`, 
+			`total`, 
+			`customer`, 
+			`worktype`, 
+			`sbi`, 
+			`receiveddate`, 
+			`reseve1`, 
+			`reseve2`, 
+			`reseve3`
+		)
+		values
+		(
+			#{pmid}, 
+			#{pm}, 
+			#{sp}, 
+			#{wbs}, 
+			#{count}, 
+			#{workbody}, 
+			#{pice}, 
+			#{total}, 
+			#{customer}, 
+			#{worktype}, 
+			#{sbi}, 
+			#{receiveddate}, 
+			#{reseve1}, 
+			#{reseve2}, 
+			#{reseve3}
+		)
+	</insert>
+
+	<update id="update" parameterType="com.fims.system.domain.PoDO">
+		update po 
+		<set>
+			<if test="pmid != null">`pmid` = #{pmid}, </if>
+			<if test="pm != null">`pm` = #{pm}, </if>
+			<if test="sp != null">`sp` = #{sp}, </if>
+			<if test="wbs != null">`wbs` = #{wbs}, </if>
+			<if test="count != null">`count` = #{count}, </if>
+			<if test="workbody != null">`workbody` = #{workbody}, </if>
+			<if test="pice != null">`pice` = #{pice}, </if>
+			<if test="total != null">`total` = #{total}, </if>
+			<if test="customer != null">`customer` = #{customer}, </if>
+			<if test="worktype != null">`worktype` = #{worktype}, </if>
+			<if test="sbi != null">`sbi` = #{sbi}, </if>
+			<if test="receiveddate != null">`receiveddate` = #{receiveddate}, </if>
+			<if test="reseve1 != null">`reseve1` = #{reseve1}, </if>
+			<if test="reseve2 != null">`reseve2` = #{reseve2}, </if>
+			<if test="reseve3 != null">`reseve3` = #{reseve3}</if>
+		</set>
+		where id = #{id}
+	</update>
+
+	<update id="updateByPo" parameterType="com.fims.system.domain.PoDO">
+		update po
+		<set>
+			<if test="pmid != null">`pmid` = #{pmid}, </if>
+			<if test="pm != null">`pm` = #{pm}, </if>
+			<if test="sp != null">`sp` = #{sp}, </if>
+			<if test="wbs != null">`wbs` = #{wbs}, </if>
+			<if test="count != null">`count` = #{count}, </if>
+			<if test="workbody != null">`workbody` = #{workbody}, </if>
+			<if test="pice != null">`pice` = #{pice}, </if>
+			<if test="total != null">`total` = #{total}, </if>
+			<if test="customer != null">`customer` = #{customer}, </if>
+			<if test="worktype != null">`worktype` = #{worktype}, </if>
+			<if test="sbi != null">`sbi` = #{sbi}, </if>
+			<if test="receiveddate != null">`receiveddate` = #{receiveddate}, </if>
+			<if test="reseve1 != null">`reseve1` = #{reseve1}, </if>
+			<if test="reseve2 != null">`reseve2` = #{reseve2}, </if>
+			<if test="reseve3 != null">`reseve3` = #{reseve3}</if>
+		</set>
+		where reseve1 = #{reseve1}
+	</update>
+
+	<update id="clearSbi" parameterType="String">
+		update po
+		<set>
+			<if test="_parameter != null">`sbi` = NULL </if>
+		</set>
+		where sbi = #{_parameter}
+	</update>
+
+	<delete id="remove">
+		delete from po where id = #{value}
+	</delete>
+	
+	<delete id="batchRemove">
+		delete from po where id in 
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+</mapper>

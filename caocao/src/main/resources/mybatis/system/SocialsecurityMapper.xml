@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.fims.system.dao.SocialsecurityDao">
+
+	<select id="get" resultType="com.fims.system.domain.SocialsecurityDO">
+		select `id`,`user_id`,`pension`,`medical`,`unemployment`,`pmu_total`,`serious`,`provident`,`total`,`type`,`payland`,`idnumber`,`paycompany`,`pay`,`allowance`,`reseve1`,`reseve2`,`reseve3` from pm_socialsecurity where id = #{value}
+	</select>
+
+	<select id="list" resultType="com.fims.system.domain.SocialsecurityDO">
+		select `id`,`user_id`,`pension`,`medical`,`unemployment`,`pmu_total`,`serious`,`provident`,`total`,`type`,`payland`,`idnumber`,`paycompany`,`pay`,`allowance`,`reseve1`,`reseve2`,`reseve3` from pm_socialsecurity
+        <where>  
+		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+		  		  <if test="userId != null and userId != ''"> and user_id = #{userId} </if>
+		  		  <if test="pension != null and pension != ''"> and pension = #{pension} </if>
+		  		  <if test="medical != null and medical != ''"> and medical = #{medical} </if>
+		  		  <if test="unemployment != null and unemployment != ''"> and unemployment = #{unemployment} </if>
+		  		  <if test="pmuTotal != null and pmuTotal != ''"> and pmu_total = #{pmuTotal} </if>
+		  		  <if test="serious != null and serious != ''"> and serious = #{serious} </if>
+		  		  <if test="provident != null and provident != ''"> and provident = #{provident} </if>
+		  		  <if test="total != null and total != ''"> and total = #{total} </if>
+		  		  <if test="type != null and type != ''"> and type = #{type} </if>
+		  		  <if test="payland != null and payland != ''"> and payland = #{payland} </if>
+		  		  <if test="idnumber != null and idnumber != ''"> and idnumber = #{idnumber} </if>
+		  		  <if test="paycompany != null and paycompany != ''"> and paycompany = #{paycompany} </if>
+		  		  <if test="pay != null and pay != ''"> and pay = #{pay} </if>
+		  		  <if test="allowance != null and allowance != ''"> and allowance = #{allowance} </if>
+		  		  <if test="reseve1 != null and reseve1 != ''"> and reseve1 = #{reseve1} </if>
+		  		  <if test="reseve2 != null and reseve2 != ''"> and reseve2 = #{reseve2} </if>
+		  		  <if test="reseve3 != null and reseve3 != ''"> and reseve3 = #{reseve3} </if>
+		  		</where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+			<otherwise>
+                order by id desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="count" resultType="int">
+		select count(*) from pm_socialsecurity
+		 <where>  
+		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+		  		  <if test="userId != null and userId != ''"> and user_id = #{userId} </if>
+		  		  <if test="pension != null and pension != ''"> and pension = #{pension} </if>
+		  		  <if test="medical != null and medical != ''"> and medical = #{medical} </if>
+		  		  <if test="unemployment != null and unemployment != ''"> and unemployment = #{unemployment} </if>
+		  		  <if test="pmuTotal != null and pmuTotal != ''"> and pmu_total = #{pmuTotal} </if>
+		  		  <if test="serious != null and serious != ''"> and serious = #{serious} </if>
+		  		  <if test="provident != null and provident != ''"> and provident = #{provident} </if>
+		  		  <if test="total != null and total != ''"> and total = #{total} </if>
+		  		  <if test="type != null and type != ''"> and type = #{type} </if>
+		  		  <if test="payland != null and payland != ''"> and payland = #{payland} </if>
+		  		  <if test="idnumber != null and idnumber != ''"> and idnumber = #{idnumber} </if>
+		  		  <if test="paycompany != null and paycompany != ''"> and paycompany = #{paycompany} </if>
+		  		  <if test="pay != null and pay != ''"> and pay = #{pay} </if>
+		  		  <if test="allowance != null and allowance != ''"> and allowance = #{allowance} </if>
+		  		  <if test="reseve1 != null and reseve1 != ''"> and reseve1 = #{reseve1} </if>
+		  		  <if test="reseve2 != null and reseve2 != ''"> and reseve2 = #{reseve2} </if>
+		  		  <if test="reseve3 != null and reseve3 != ''"> and reseve3 = #{reseve3} </if>
+		  		</where>
+	</select>
+	 
+	<insert id="save" parameterType="com.fims.system.domain.SocialsecurityDO">
+		insert into pm_socialsecurity
+		(
+			`id`, 
+			`user_id`, 
+			`pension`, 
+			`medical`, 
+			`unemployment`, 
+			`pmu_total`, 
+			`serious`, 
+			`provident`, 
+			`total`, 
+			`type`, 
+			`payland`, 
+			`idnumber`, 
+			`paycompany`, 
+			`pay`, 
+			`allowance`, 
+			`reseve1`, 
+			`reseve2`, 
+			`reseve3`
+		)
+		values
+		(
+			#{id}, 
+			#{userId}, 
+			#{pension}, 
+			#{medical}, 
+			#{unemployment}, 
+			#{pmuTotal}, 
+			#{serious}, 
+			#{provident}, 
+			#{total}, 
+			#{type}, 
+			#{payland}, 
+			#{idnumber}, 
+			#{paycompany}, 
+			#{pay}, 
+			#{allowance}, 
+			#{reseve1}, 
+			#{reseve2}, 
+			#{reseve3}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.fims.system.domain.SocialsecurityDO">
+		update pm_socialsecurity 
+		<set>
+			<if test="userId != null">`user_id` = #{userId}, </if>
+			<if test="pension != null">`pension` = #{pension}, </if>
+			<if test="medical != null">`medical` = #{medical}, </if>
+			<if test="unemployment != null">`unemployment` = #{unemployment}, </if>
+			<if test="pmuTotal != null">`pmu_total` = #{pmuTotal}, </if>
+			<if test="serious != null">`serious` = #{serious}, </if>
+			<if test="provident != null">`provident` = #{provident}, </if>
+			<if test="total != null">`total` = #{total}, </if>
+			<if test="type != null">`type` = #{type}, </if>
+			<if test="payland != null">`payland` = #{payland}, </if>
+			<if test="idnumber != null">`idnumber` = #{idnumber}, </if>
+			<if test="paycompany != null">`paycompany` = #{paycompany}, </if>
+			<if test="pay != null">`pay` = #{pay}, </if>
+			<if test="allowance != null">`allowance` = #{allowance}, </if>
+			<if test="reseve1 != null">`reseve1` = #{reseve1}, </if>
+			<if test="reseve2 != null">`reseve2` = #{reseve2}, </if>
+			<if test="reseve3 != null">`reseve3` = #{reseve3}</if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<delete id="remove">
+		delete from pm_socialsecurity where id = #{value}
+	</delete>
+	
+	<delete id="batchRemove">
+		delete from pm_socialsecurity where id in 
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+</mapper>

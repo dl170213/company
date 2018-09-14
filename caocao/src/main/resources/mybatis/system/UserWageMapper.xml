@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.fims.system.dao.UserWageDao">
+
+	<select id="get" resultType="com.fims.system.domain.UserWageDO">
+		select `id`,`user_id`,`basewage`,`reimbursement`,`probationwage`,`probursement`,`wagecardnumber`,`coupletnumber`,`openbank`,`wagecardnumber1`,`coupletnumber1`,`openbank1`,`reseve1`,`reseve2`,`reseve3` from pm_user_wage where id = #{value}
+	</select>
+
+	<select id="list" resultType="com.fims.system.domain.UserWageDO">
+		select `id`,`user_id`,`basewage`,`reimbursement`,`probationwage`,`probursement`,`wagecardnumber`,`coupletnumber`,`openbank`,`wagecardnumber1`,`coupletnumber1`,`openbank1`,`reseve1`,`reseve2`,`reseve3` from pm_user_wage
+        <where>  
+		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+		  		  <if test="userId != null and userId != ''"> and user_id = #{userId} </if>
+		  		  <if test="basewage != null and basewage != ''"> and basewage = #{basewage} </if>
+		  		  <if test="reimbursement != null and reimbursement != ''"> and reimbursement = #{reimbursement} </if>
+		  		  <if test="probationwage != null and probationwage != ''"> and probationwage = #{probationwage} </if>
+		  		  <if test="probursement != null and probursement != ''"> and probursement = #{probursement} </if>
+		  		  <if test="wagecardnumber != null and wagecardnumber != ''"> and wagecardnumber = #{wagecardnumber} </if>
+		  		  <if test="coupletnumber != null and coupletnumber != ''"> and coupletnumber = #{coupletnumber} </if>
+		  		  <if test="openbank != null and openbank != ''"> and openbank = #{openbank} </if>
+		  		  <if test="wagecardnumber1 != null and wagecardnumber1 != ''"> and wagecardnumber1 = #{wagecardnumber1} </if>
+		  		  <if test="coupletnumber1 != null and coupletnumber1 != ''"> and coupletnumber1 = #{coupletnumber1} </if>
+		  		  <if test="openbank1 != null and openbank1 != ''"> and openbank1 = #{openbank1} </if>
+		  		  <if test="reseve1 != null and reseve1 != ''"> and reseve1 = #{reseve1} </if>
+		  		  <if test="reseve2 != null and reseve2 != ''"> and reseve2 = #{reseve2} </if>
+		  		  <if test="reseve3 != null and reseve3 != ''"> and reseve3 = #{reseve3} </if>
+		  		</where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+			<otherwise>
+                order by id desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="count" resultType="int">
+		select count(*) from pm_user_wage
+		 <where>  
+		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+		  		  <if test="userId != null and userId != ''"> and user_id = #{userId} </if>
+		  		  <if test="basewage != null and basewage != ''"> and basewage = #{basewage} </if>
+		  		  <if test="reimbursement != null and reimbursement != ''"> and reimbursement = #{reimbursement} </if>
+		  		  <if test="probationwage != null and probationwage != ''"> and probationwage = #{probationwage} </if>
+		  		  <if test="probursement != null and probursement != ''"> and probursement = #{probursement} </if>
+		  		  <if test="wagecardnumber != null and wagecardnumber != ''"> and wagecardnumber = #{wagecardnumber} </if>
+		  		  <if test="coupletnumber != null and coupletnumber != ''"> and coupletnumber = #{coupletnumber} </if>
+		  		  <if test="openbank != null and openbank != ''"> and openbank = #{openbank} </if>
+		  		  <if test="wagecardnumber1 != null and wagecardnumber1 != ''"> and wagecardnumber1 = #{wagecardnumber1} </if>
+		  		  <if test="coupletnumber1 != null and coupletnumber1 != ''"> and coupletnumber1 = #{coupletnumber1} </if>
+		  		  <if test="openbank1 != null and openbank1 != ''"> and openbank1 = #{openbank1} </if>
+		  		  <if test="reseve1 != null and reseve1 != ''"> and reseve1 = #{reseve1} </if>
+		  		  <if test="reseve2 != null and reseve2 != ''"> and reseve2 = #{reseve2} </if>
+		  		  <if test="reseve3 != null and reseve3 != ''"> and reseve3 = #{reseve3} </if>
+		  		</where>
+	</select>
+	 
+	<insert id="save" parameterType="com.fims.system.domain.UserWageDO">
+		insert into pm_user_wage
+		(
+			`id`, 
+			`user_id`, 
+			`basewage`, 
+			`reimbursement`, 
+			`probationwage`, 
+			`probursement`, 
+			`wagecardnumber`, 
+			`coupletnumber`, 
+			`openbank`, 
+			`wagecardnumber1`, 
+			`coupletnumber1`, 
+			`openbank1`, 
+			`reseve1`, 
+			`reseve2`, 
+			`reseve3`
+		)
+		values
+		(
+			#{id}, 
+			#{userId}, 
+			#{basewage}, 
+			#{reimbursement}, 
+			#{probationwage}, 
+			#{probursement}, 
+			#{wagecardnumber}, 
+			#{coupletnumber}, 
+			#{openbank}, 
+			#{wagecardnumber1}, 
+			#{coupletnumber1}, 
+			#{openbank1}, 
+			#{reseve1}, 
+			#{reseve2}, 
+			#{reseve3}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.fims.system.domain.UserWageDO">
+		update pm_user_wage 
+		<set>
+			<if test="userId != null">`user_id` = #{userId}, </if>
+			<if test="basewage != null">`basewage` = #{basewage}, </if>
+			<if test="reimbursement != null">`reimbursement` = #{reimbursement}, </if>
+			<if test="probationwage != null">`probationwage` = #{probationwage}, </if>
+			<if test="probursement != null">`probursement` = #{probursement}, </if>
+			<if test="wagecardnumber != null">`wagecardnumber` = #{wagecardnumber}, </if>
+			<if test="coupletnumber != null">`coupletnumber` = #{coupletnumber}, </if>
+			<if test="openbank != null">`openbank` = #{openbank}, </if>
+			<if test="wagecardnumber1 != null">`wagecardnumber1` = #{wagecardnumber1}, </if>
+			<if test="coupletnumber1 != null">`coupletnumber1` = #{coupletnumber1}, </if>
+			<if test="openbank1 != null">`openbank1` = #{openbank1}, </if>
+			<if test="reseve1 != null">`reseve1` = #{reseve1}, </if>
+			<if test="reseve2 != null">`reseve2` = #{reseve2}, </if>
+			<if test="reseve3 != null">`reseve3` = #{reseve3}</if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<delete id="remove">
+		delete from pm_user_wage where id = #{value}
+	</delete>
+	
+	<delete id="batchRemove">
+		delete from pm_user_wage where id in 
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+</mapper>
